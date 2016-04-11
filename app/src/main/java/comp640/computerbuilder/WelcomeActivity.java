@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.firebase.client.Firebase;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,14 +47,22 @@ public class WelcomeActivity extends AppCompatActivity {
         _welcomeImage = (ImageView)findViewById(R.id.welcomeImageView);
         _welcomeTimer = new Timer();
 
+        initializeDB();
         animate();
+    }
+
+    /**
+     * Initializes the database
+     */
+    private void initializeDB(){
+        Firebase.setAndroidContext(getApplicationContext());
     }
 
     /**
      * Animates the picture.
      */
     private void animate(){
-        YoYo.with(Techniques.FadeIn)
+        YoYo.with(Techniques.FadeInRight)
                 .duration(WELCOME_TIME)
                 .playOn(_welcomeImage);
         startTimer();

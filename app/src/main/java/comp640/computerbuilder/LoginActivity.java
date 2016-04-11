@@ -17,6 +17,9 @@ import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.prefs.Preferences;
 
+import comp640.computerbuilder.backend.DataController;
+import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
+
 /**
  * Created by alexanderturner on 4/10/16.
  * Represents the login screen of the application.
@@ -91,9 +94,10 @@ public class LoginActivity extends AppCompatActivity {
         setOnClickListeners();
 
         String email = checkForRememberedEmail();
-        if(email.equals("")){
+        if(!email.equals("")){
             _emailEditText.setText(email);
             _rememberMeButton.setChecked(true);
+            _passwordEditText.requestFocus();
         }else {
             _rememberMeButton.setChecked(false);
         }
@@ -127,15 +131,27 @@ public class LoginActivity extends AppCompatActivity {
      * @param email the email.
      * @param password the password.
      */
-    private void attemptLogin(String email, String password, boolean remember){
+    private void attemptLogin(final String email, final String password, final boolean remember){
         //Check preconditions
         if(!checkInputsAndDisplayErrors(email,password))
             return;
 
         _progressBar.setVisibility(View.VISIBLE);
+        DataController.getController().getUser().login(email, password, new OnBackendTaskCompleteListener() {
+            @Override
+            public void onSuccess() {
+                rememberEmail(email, remember);
+                loginOrRegisterSuccess();
+                _progressBar.setVisibility(View.INVISIBLE);
+            }
 
-        if(remember)
-            rememberEmail(email);
+            @Override
+            public void onFailure(String reason) {
+                loginOrRegisterFailure(reason);
+                _progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+
     }
 
     /**
@@ -143,15 +159,43 @@ public class LoginActivity extends AppCompatActivity {
      * @param email the email.
      * @param password the password.
      */
-    private void attemptRegister(String email, String password, boolean remember){
+    private void attemptRegister(final String email, final String password, final boolean remember){
         //Check preconditions
         if(!checkInputsAndDisplayErrors(email,password))
             return;
 
         _progressBar.setVisibility(View.VISIBLE);
+        DataController.getController().getUser().register(email, password, new OnBackendTaskCompleteListener() {
+            @Override
+            public void onSuccess() {
+                attemptLogin(email,password,remember);
+            }
 
-        if(remember)
-            rememberEmail(email);
+            @Override
+            public void onFailure(String reason) {
+                loginOrRegisterFailure(reason);
+                _progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+    }
+
+    /**
+     * Called upon success of logging in or registering
+     */
+    private void loginOrRegisterSuccess(){
+        Toast.makeText(getApplicationContext(),"Success", Toast.LENGTH_LONG).show();
+        switchToBuildsActivity();
+    }
+
+    /**
+     * Called upon failure of logging in or registering
+     * @param error the error from the db
+     */
+    private void loginOrRegisterFailure(String error){
+        showInvalidInput(_emailEditText);
+        showInvalidInput(_passwordEditText, error);
     }
 
     /**
@@ -204,10 +248,14 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Remembers the email.
      * @param email the email.
+     * @param remember whether or not to remember the email.
      */
-    private void rememberEmail(String email){
+    private void rememberEmail(String email, boolean remember){
         SharedPreferences.Editor editor = _preferences.edit();
-        editor.putString(EMAIL_TAG,email);
+        if(remember)
+            editor.putString(EMAIL_TAG,email);
+        else
+            editor.putString(EMAIL_TAG,"");
         editor.commit();
     }
 
