@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 /**
  * Created by alexanderturner on 4/10/16.
- * Shows the welcome screen upon startup.
+ * Shows the welcome animation upon startup.
  */
 public class WelcomeActivity extends AppCompatActivity {
 

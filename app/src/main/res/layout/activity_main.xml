@@ -7,14 +7,50 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="comp640.computerbuilder.WelcomeActivity">
+    tools:context="comp640.computerbuilder.WelcomeActivity"
+    android:orientation="vertical"
+    android:weightSum="100">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Main"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="24dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/main_text"
+        android:id="@+id/mainTextView"
+        android:layout_weight="40"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:textColor="@color/colorButtonText"
+        android:text="Build a PC"
+        android:id="@+id/buildButton"
+        android:layout_weight="20"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:textColor="@color/colorButtonText"
+        android:text="Buy Individual Parts"
+        android:id="@+id/buyButton"
+        android:layout_weight="20"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:textColor="@color/colorButtonText"
+        android:text="Login"
+        android:id="@+id/loginButton"
+        android:layout_weight="20"/>
 </LinearLayout>
