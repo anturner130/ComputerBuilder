@@ -1,18 +1,37 @@
 package comp640.computerbuilder;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
+import java.util.prefs.Preferences;
 
 /**
  * Created by alexanderturner on 4/10/16.
  * Represents the login screen of the application.
  */
 public class LoginActivity extends AppCompatActivity {
+
+    /**
+     * The duration of the shake animation.
+     */
+    private static final int SHAKE_DURATION = 500;
+
+    /**
+     * The tag of the stored email.
+     */
+    private static final String EMAIL_TAG = "email";
 
     /**
      * Holds the user's email.
@@ -39,6 +58,16 @@ public class LoginActivity extends AppCompatActivity {
      */
     private Button _registerButton;
 
+    /**
+     * The progress bar.
+     */
+    private ProgressBar _progressBar;
+
+    /**
+     * The shared preferences.
+     */
+    private SharedPreferences _preferences;
+
 
     /**
      * Sets the content view and initializes the UI global variables
@@ -55,11 +84,14 @@ public class LoginActivity extends AppCompatActivity {
         _rememberMeButton = (ToggleButton)findViewById(R.id.rememberMeButton);
         _loginButton = (Button)findViewById(R.id.loginButton);
         _registerButton = (Button)findViewById(R.id.registerButton);
+        _progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
+
+        _preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setOnClickListeners();
 
         String email = checkForRememberedEmail();
-        if(email == null){
+        if(email.equals("")){
             _emailEditText.setText(email);
             _rememberMeButton.setChecked(true);
         }else {
@@ -97,14 +129,13 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin(String email, String password, boolean remember){
         //Check preconditions
-        if(email.equals("")){
-            Toast.makeText(getApplicationContext(),"Email is missing", Toast.LENGTH_SHORT).show();
+        if(!checkInputsAndDisplayErrors(email,password))
             return;
-        }
-        if(password.equals("")){
-            Toast.makeText(getApplicationContext(),"Password is missing", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+        _progressBar.setVisibility(View.VISIBLE);
+
+        if(remember)
+            rememberEmail(email);
     }
 
     /**
@@ -114,30 +145,80 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptRegister(String email, String password, boolean remember){
         //Check preconditions
-        if(email.equals("")){
-            Toast.makeText(getApplicationContext(),"Email is missing", Toast.LENGTH_SHORT).show();
+        if(!checkInputsAndDisplayErrors(email,password))
             return;
-        }
-        if(password.equals("")){
-            Toast.makeText(getApplicationContext(),"Password is missing", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+        _progressBar.setVisibility(View.VISIBLE);
+
+        if(remember)
+            rememberEmail(email);
     }
+
+    /**
+     * Checks the fields to see if they're empty and displays errors if they are
+     * @param email the user's email.
+     * @param password the user's password.
+     * @return true if no errors, otherwise false.
+     */
+    private boolean checkInputsAndDisplayErrors(String email, String password){
+        if(email.equals("") && password.equals("")){
+            showInvalidInput(_emailEditText);
+            showInvalidInput(_passwordEditText, "Both fields are missing");
+            return false;
+        }
+        if(email.equals("")){
+            showInvalidInput(_emailEditText, "Email is missing");
+            return false;
+        }
+        if (password.equals("")) {
+            showInvalidInput(_passwordEditText, "Password is missing");
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Overloaded showWrongInput to take only the view.
+     * @param inputView the view that is invalid.
+     */
+    private void showInvalidInput(TextView inputView){
+        showInvalidInput(inputView, null);
+    }
+
+    /**
+     * Shows the user that their input is wrong.
+     * @param inputView the view that is invalid.
+     * @param message the message to be displayed.
+     */
+    private void showInvalidInput(TextView inputView ,String message){
+        YoYo.with(Techniques.Shake)
+                .duration(SHAKE_DURATION)
+                .playOn(inputView);
+
+        if(message != null)
+            Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
+    }
+
 
     /**
      * Remembers the email.
      * @param email the email.
      */
     private void rememberEmail(String email){
-
+        SharedPreferences.Editor editor = _preferences.edit();
+        editor.putString(EMAIL_TAG,email);
+        editor.commit();
     }
 
     /**
      * Checks to see if there was an email remembered.
-     * @return the remembered email.
+     * @return the remembered email or "".
      */
     private String checkForRememberedEmail(){
-        return null;
+        if(!_preferences.contains(EMAIL_TAG))
+            return "";
+        return _preferences.getString(EMAIL_TAG,"");
     }
 
     /**
