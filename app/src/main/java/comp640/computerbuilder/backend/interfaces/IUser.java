@@ -21,4 +21,16 @@ public interface IUser {
      * Logs the user out.
      */
     void logOut();
+
+    /**
+     * Checks to see if the user is logged in.
+     * @return true if logged in, otherwise false.
+     */
+    boolean isLoggedIn();
+
+    /**
+     * Gets the email of the current user.
+     * @return the email
+     */
+    String getEmail();
 }

@@ -33,11 +33,6 @@ public class DataController {
     private IBuild _localBuild;
 
     /**
-     * The boolean that controls whether or we're accessing the remot db
-     */
-    private boolean _remote;
-
-    /**
      * Private constructor for singleton.
      */
     private DataController(){
@@ -51,7 +46,7 @@ public class DataController {
      * Singleton get method.
      * @return the singleton datacontroller.
      */
-    public static DataController getController(boolean remote){
+    public static DataController getController(){
         if(_dataController == null)
             _dataController = new DataController();
         return _dataController;
@@ -70,7 +65,7 @@ public class DataController {
      * @return the build backend.
      */
     public IBuild getBuild(){
-        if(_remote)
+        if(_remoteUser.isLoggedIn())
             return _remoteBuild;
         else
             return _localBuild;
