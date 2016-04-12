@@ -1,4 +1,4 @@
-package comp640.computerbuilder;
+package comp640.computerbuilder.activities;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -17,6 +17,7 @@ import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.prefs.Preferences;
 
+import comp640.computerbuilder.R;
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
 

@@ -1,4 +1,4 @@
-package comp640.computerbuilder.backend;
+package comp640.computerbuilder.backend.remote;
 
 import com.firebase.client.Firebase;
 
