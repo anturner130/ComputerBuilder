@@ -1,10 +1,6 @@
 package comp640.computerbuilder.backend.local;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.ArraySet;
-
-import com.firebase.client.Firebase;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +8,7 @@ import java.util.Set;
 import comp640.computerbuilder.backend.interfaces.IBuild;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
 import comp640.computerbuilder.backend.listeners.OnGetBuildCompleteListener;
-import comp640.computerbuilder.backend.remote.FirebaseReference;
-import comp640.computerbuilder.model.Build;
+import comp640.computerbuilder.model.build.Build;
 
 /**
  * Created by alexanderturner on 4/11/16.

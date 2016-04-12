@@ -1,4 +1,4 @@
-package comp640.computerbuilder.model;
+package comp640.computerbuilder.model.build;
 
 import android.preference.Preference;
 

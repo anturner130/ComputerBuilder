@@ -1,6 +1,6 @@
 package comp640.computerbuilder.backend.listeners;
 
-import comp640.computerbuilder.model.Build;
+import comp640.computerbuilder.model.build.Build;
 
 /**
  * Created by alexanderturner on 4/11/16.

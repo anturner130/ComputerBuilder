@@ -1,6 +1,4 @@
-package comp640.computerbuilder.model;
-
-import android.database.sqlite.SQLiteDatabase;
+package comp640.computerbuilder.model.build;
 
 import java.util.List;
 

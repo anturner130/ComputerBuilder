@@ -1,4 +1,4 @@
-package comp640.computerbuilder.model;
+package comp640.computerbuilder.model.build;
 
 /**
  * Created by alexanderturner on 4/11/16.

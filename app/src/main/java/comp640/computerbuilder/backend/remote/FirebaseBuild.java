@@ -6,14 +6,11 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.backend.interfaces.IBuild;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
 import comp640.computerbuilder.backend.listeners.OnGetBuildCompleteListener;
-import comp640.computerbuilder.model.Build;
+import comp640.computerbuilder.model.build.Build;
 
 /**
  * Created by alexanderturner on 4/11/16.
