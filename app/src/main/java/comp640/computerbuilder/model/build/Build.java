@@ -1,11 +1,10 @@
 package comp640.computerbuilder.model.build;
 
-import android.media.Image;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import comp640.computerbuilder.backend.DataController;
-import comp640.computerbuilder.model.parts.Parts;
+import comp640.computerbuilder.model.parts.Part;
 
 /**
  * Created by alexanderturner on 4/11/16.
@@ -36,7 +35,7 @@ public class Build {
     /**
      * The list of parts.
      */
-    private Parts _parts;
+    private List<Part> _parts;
 
     /**
      * The list of images.
@@ -66,7 +65,7 @@ public class Build {
         _budgetMax = budgetMax;
         _style = style;
         _stores = stores;
-        _parts = new Parts();
+        _parts = new ArrayList<>();
 
         updateDB();
     }
@@ -94,7 +93,7 @@ public class Build {
         return _stores;
     }
 
-    public Parts getParts(){ return _parts;}
+    public List<Part> getParts(){ return _parts;}
 
     public String getImageURL(){return _imageURL;}
 

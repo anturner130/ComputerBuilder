@@ -1,4 +1,4 @@
-package comp640.computerbuilder;
+package comp640.computerbuilder.fragments;
 
 
 import android.support.v4.app.Fragment;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.Locale;
+
+import comp640.computerbuilder.R;
 
 /**
  * Created by deandubois on 4/17/16.
