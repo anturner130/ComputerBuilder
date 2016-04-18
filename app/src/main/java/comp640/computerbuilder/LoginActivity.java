@@ -274,7 +274,8 @@ public class LoginActivity extends AppCompatActivity {
      * Switch to the saved builds activity.
      */
     private void switchToBuildsActivity(){
-
+        Intent activity = new Intent().setClass(getApplicationContext(), MenuActivity.class);
+        startActivity(activity);
     }
 }
 
