@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
      * Switch to the build activity.
      */
     private void switchToBuildActivity(){
-
+        //Temporary bypass of the login
+        startActivity(MenuActivity.class);
     }
 
     /**
