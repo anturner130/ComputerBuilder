@@ -20,9 +20,8 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- *
- *
- *
+ * Created by alexanderturner on 4/17/16.
+ * Represents the list adapter for saved builds.
  */
 public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsViewAdapter.ViewHolder>{
 
@@ -98,6 +97,9 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
 
     }
 
+    /**
+     * Class to download an image from a URL in the background
+     */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

@@ -7,5 +7,10 @@ package comp640.computerbuilder.model.build;
 public enum BuildStore {
     Multiple_Stores,
     Amazon,
-    Newegg
+    Newegg;
+
+    @Override
+    public String toString() {
+        return super.toString().replace("_"," ");
+    }
 }

@@ -16,10 +16,8 @@ import comp640.computerbuilder.model.build.OnBuildsChangedListener;
 import comp640.computerbuilder.model.build.SavedBuilds;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
+ * Created by alexanderturner on 4/17/16.
+ * Represents the screen of saved builds.
  */
 public class SavedBuildsListFragment extends Fragment implements OnBuildsChangedListener{
 
