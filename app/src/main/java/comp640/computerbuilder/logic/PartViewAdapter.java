@@ -1,4 +1,4 @@
-package comp640.computerbuilder;
+package comp640.computerbuilder.logic;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import comp640.computerbuilder.PartListFragment.OnListFragmentInteractionListener;
+import comp640.computerbuilder.R;
+import comp640.computerbuilder.fragments.PartListFragment.OnListFragmentInteractionListener;
 import comp640.computerbuilder.dummy.DummyContent.DummyItem;
 
 import java.util.List;

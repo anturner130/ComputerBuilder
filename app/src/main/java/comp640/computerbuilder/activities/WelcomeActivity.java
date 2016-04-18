@@ -1,10 +1,8 @@
-package comp640.computerbuilder;
+package comp640.computerbuilder.activities;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -13,6 +11,9 @@ import com.firebase.client.Firebase;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import comp640.computerbuilder.R;
+import comp640.computerbuilder.activities.MainActivity;
 
 /**
  * Created by alexanderturner on 4/10/16.

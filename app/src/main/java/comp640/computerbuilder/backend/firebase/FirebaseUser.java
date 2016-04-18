@@ -1,4 +1,4 @@
-package comp640.computerbuilder.backend;
+package comp640.computerbuilder.backend.firebase;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -11,6 +11,7 @@ import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
 
 /**
  * Created by alexanderturner on 4/11/16.
+ * Represents the user methods to access the remote db
  */
 public class FirebaseUser implements IUser{
 
@@ -18,6 +19,11 @@ public class FirebaseUser implements IUser{
      * The reference to the DB.
      */
     private Firebase _reference;
+
+    /**
+     * The email of the current user;
+     */
+    private String _email;
 
     /**
      * Constructor to initialize the local variables
@@ -33,10 +39,11 @@ public class FirebaseUser implements IUser{
      * @param listener the listener for when the task is complete.
      */
     @Override
-    public void login(String email, String password, final OnBackendTaskCompleteListener listener) {
+    public void login(final String email, String password, final OnBackendTaskCompleteListener listener) {
         _reference.authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
+                _email = email;
                 listener.onSuccess();
             }
 
@@ -74,6 +81,25 @@ public class FirebaseUser implements IUser{
     @Override
     public void logOut() {
         _reference.unauth();
+        _email = null;
+    }
+
+    /**
+     * Checks to see if the current user is logged in.
+     * @return true if logged in, otherwise false.
+     */
+    @Override
+    public boolean isLoggedIn() {
+        return _reference.getAuth() != null;
+    }
+
+    /**
+     * Gets the email of the current user.
+     * @return the email
+     */
+    @Override
+    public String getEmail() {
+        return _email;
     }
 
 }
