@@ -17,6 +17,29 @@
         completions."
     </string>
 
+<<<<<<< HEAD
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <!-- Strings for items related to the side menu-->
+    <string-array name="drawer_items">
+        <item>My Profile</item>
+        <item>New Build</item>
+        <item>Saved Builds</item>
+        <item>My Cart</item>
+        <item>Settings</item>
+        <item>Help</item>
+        <item>Log Out</item>
+    </string-array>
+    <string name="profile">My Profile</string>
+    <string name="new_build">New Build</string>
+    <string name="saved_builds">Saved Builds</string>
+    <string name="cart">My Cart</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
+    <string name="log_out">Log Out</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+>>>>>>> master
 </resources>

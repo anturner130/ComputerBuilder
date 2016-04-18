@@ -1,5 +1,6 @@
 package comp640.computerbuilder.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -274,7 +275,8 @@ public class LoginActivity extends AppCompatActivity {
      * Switch to the saved builds activity.
      */
     private void switchToBuildsActivity(){
-
+        Intent activity = new Intent().setClass(getApplicationContext(), MenuActivity.class);
+        startActivity(activity);
     }
 }
 
