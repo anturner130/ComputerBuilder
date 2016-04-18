@@ -1,4 +1,4 @@
-package comp640.computerbuilder.backend.remote;
+package comp640.computerbuilder.backend.firebase;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -8,7 +8,6 @@ import java.util.Map;
 
 import comp640.computerbuilder.backend.interfaces.IUser;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
-import comp640.computerbuilder.backend.remote.FirebaseReference;
 
 /**
  * Created by alexanderturner on 4/11/16.

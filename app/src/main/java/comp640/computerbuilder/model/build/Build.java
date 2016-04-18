@@ -1,6 +1,11 @@
 package comp640.computerbuilder.model.build;
 
+import android.media.Image;
+
 import java.util.List;
+
+import comp640.computerbuilder.backend.DataController;
+import comp640.computerbuilder.model.parts.Parts;
 
 /**
  * Created by alexanderturner on 4/11/16.
@@ -29,6 +34,21 @@ public class Build {
     private List<BuildStore> _stores;
 
     /**
+     * The list of parts.
+     */
+    private Parts _parts;
+
+    /**
+     * The list of images.
+     */
+    private String _imageURL;
+
+    /**
+     * The total price;
+     */
+    private int _price;
+
+    /**
      * Constructor to initialize local variables
      * @param name the name of the build.
      * @param budgetMin the minimum budget.
@@ -46,6 +66,7 @@ public class Build {
         _budgetMax = budgetMax;
         _style = style;
         _stores = stores;
+        _parts = new Parts();
 
         updateDB();
     }
@@ -73,7 +94,28 @@ public class Build {
         return _stores;
     }
 
-    private void updateDB(){
+    public Parts getParts(){ return _parts;}
 
+    public String getImageURL(){return _imageURL;}
+
+    public int getPrice(){return _price;}
+
+    /**
+     * Setters
+     */
+
+    public void setImageURL(String url){
+        _imageURL = url;
+        updateDB();
+    }
+
+    public void setPrice(int price){
+        _price = price;
+        updateDB();
+    }
+
+
+    private void updateDB(){
+        DataController.getController().getBuild().updateBuild(this,null);
     }
 }

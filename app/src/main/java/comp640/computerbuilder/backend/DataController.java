@@ -2,9 +2,8 @@ package comp640.computerbuilder.backend;
 
 import comp640.computerbuilder.backend.interfaces.IBuild;
 import comp640.computerbuilder.backend.interfaces.IUser;
-import comp640.computerbuilder.backend.local.SQLiteBuild;
-import comp640.computerbuilder.backend.remote.FirebaseBuild;
-import comp640.computerbuilder.backend.remote.FirebaseUser;
+import comp640.computerbuilder.backend.firebase.FirebaseBuild;
+import comp640.computerbuilder.backend.firebase.FirebaseUser;
 
 /**
  * Created by alexanderturner on 4/11/16.
@@ -20,26 +19,20 @@ public class DataController {
     /**
      * The remote user backend.
      */
-    private IUser _remoteUser;
+    private IUser _user;
 
     /**
      * The remote build backend;
      */
-    private IBuild _remoteBuild;
+    private IBuild _build;
 
-    /**
-     * The remote build backend;
-     */
-    private IBuild _localBuild;
 
     /**
      * Private constructor for singleton.
      */
     private DataController(){
-        _remoteUser = new FirebaseUser();
-        _remoteBuild = new FirebaseBuild();
-
-        _localBuild = new SQLiteBuild();
+        _user = new FirebaseUser();
+        _build = new FirebaseBuild();
     }
 
     /**
@@ -57,7 +50,7 @@ public class DataController {
      * @return the user backend.
      */
     public IUser getUser(){
-        return _remoteUser;
+        return _user;
     }
 
     /**
@@ -65,9 +58,6 @@ public class DataController {
      * @return the build backend.
      */
     public IBuild getBuild(){
-        if(_remoteUser.isLoggedIn())
-            return _remoteBuild;
-        else
-            return _localBuild;
+        return _build;
     }
 }

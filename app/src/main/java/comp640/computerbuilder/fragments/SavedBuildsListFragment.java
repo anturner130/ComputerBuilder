@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.logic.SavedBuildsViewAdapter;
 import comp640.computerbuilder.model.build.Build;
+import comp640.computerbuilder.model.build.OnBuildsChangedListener;
 import comp640.computerbuilder.model.build.SavedBuilds;
 
 /**
@@ -20,9 +21,10 @@ import comp640.computerbuilder.model.build.SavedBuilds;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class SavedBuildsListFragment extends Fragment {
+public class SavedBuildsListFragment extends Fragment implements OnBuildsChangedListener{
 
-    private OnListFragmentInteractionListener mListener;
+    private OnListFragmentInteractionListener _listener;
+    private SavedBuildsViewAdapter _adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,7 +44,8 @@ public class SavedBuildsListFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new SavedBuildsViewAdapter(SavedBuilds.BUILDS, mListener));
+            _adapter = new SavedBuildsViewAdapter(SavedBuilds.getSingleton().getBuilds(), _listener);
+            recyclerView.setAdapter(_adapter);
         }
         return view;
     }
@@ -52,7 +55,8 @@ public class SavedBuildsListFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+            _listener = (OnListFragmentInteractionListener) context;
+            SavedBuilds.getSingleton().registerOnBuildsChangedListener(this);
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -62,7 +66,16 @@ public class SavedBuildsListFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        SavedBuilds.getSingleton().unregisterOnBuildsChangedListener(this);
+        _listener = null;
+        _adapter = null;
+    }
+
+    @Override
+    public void onBuildsChanged() {
+        if(_adapter != null){
+            _adapter.notifyDataSetChanged();
+        }
     }
 
     /**

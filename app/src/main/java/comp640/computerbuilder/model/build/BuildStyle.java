@@ -11,5 +11,10 @@ public enum BuildStyle {
     Gaming,
     Social,
     Business,
-    School
+    School;
+
+    @Override
+    public String toString() {
+        return super.toString().replace("_"," ");
+    }
 }
