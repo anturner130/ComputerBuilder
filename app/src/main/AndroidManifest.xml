@@ -32,6 +32,11 @@
             android:name=".LoginActivity"
             android:label="Login"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".MenuActivity"
+            android:label="Menu"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

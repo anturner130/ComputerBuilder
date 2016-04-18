@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_1"
+            android:checked="true"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/navigation_item_2"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/new_build" />
+        <item
+            android:id="@+id/navigation_item_3"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/saved_builds" />
+        <item
+            android:id="@+id/navigation_item_4"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/cart" />
+        <item
+            android:id="@+id/navigation_item_5"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/navigation_item_6"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/help" />
+        <item
+            android:id="@+id/navigation_item_7"
+            android:icon="@drawable/computer_builder_welcome"
+            android:title="@string/log_out" />
+    </group>
+
+
+</menu>
