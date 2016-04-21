@@ -14,6 +14,10 @@ import java.util.TimerTask;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.activities.MainActivity;
+import comp640.computerbuilder.backend.DataController;
+import comp640.computerbuilder.backend.firebase.FirebaseReference;
+import comp640.computerbuilder.logic.SettingsReference;
+import comp640.computerbuilder.model.build.SavedBuilds;
 
 /**
  * Created by alexanderturner on 4/10/16.
@@ -56,7 +60,9 @@ public class WelcomeActivity extends AppCompatActivity {
      * Initializes the database
      */
     private void initializeDB(){
-        Firebase.setAndroidContext(getApplicationContext());
+        FirebaseReference.getSingleton().Initialize(getApplicationContext());
+        SavedBuilds.getSingleton().init();
+        SettingsReference.getReference().init();
     }
 
     /**

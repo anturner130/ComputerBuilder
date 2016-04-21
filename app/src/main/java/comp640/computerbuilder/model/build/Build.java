@@ -1,5 +1,8 @@
 package comp640.computerbuilder.model.build;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,42 +13,45 @@ import comp640.computerbuilder.model.parts.Part;
  * Created by alexanderturner on 4/11/16.
  * Represents a build
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Build {
     /**
      * The build name.
      */
-    private String _name;
+    private String name;
 
     /**
      * The budget range.
      */
-    private int _budgetMin;
-    private int _budgetMax;
+    private int budgetMin;
+    private int budgetMax;
 
     /**
      * The build style.
      */
-    private BuildStyle _style;
+    private BuildStyle style;
 
     /**
      * The list of stores the the build supports.
      */
-    private List<BuildStore> _stores;
+    private List<BuildStore> stores;
 
     /**
      * The list of parts.
      */
-    private List<Part> _parts;
+    private List<Part> parts;
 
     /**
      * The list of images.
      */
-    private String _imageURL;
+    private String imageURL;
 
     /**
      * The total price;
      */
-    private int _price;
+    private int price;
+
+    private Build(){}
 
     /**
      * Constructor to initialize local variables
@@ -55,17 +61,20 @@ public class Build {
      * @param style the build style.
      * @param stores the stores accepted.
      */
+    @JsonIgnore
     public Build(String name,
                  int budgetMin,
                  int budgetMax,
                  BuildStyle style,
                  List<BuildStore> stores){
-        _name = name;
-        _budgetMin = budgetMin;
-        _budgetMax = budgetMax;
-        _style = style;
-        _stores = stores;
-        _parts = new ArrayList<>();
+        this.name = name;
+        this.budgetMin = budgetMin;
+        this.budgetMax = budgetMax;
+        this.style = style;
+        this.stores = stores;
+        this.parts = new ArrayList<>();
+        this.imageURL = "";
+        this.price = 0;
 
         updateDB();
     }
@@ -74,47 +83,61 @@ public class Build {
      * Getters
      */
     public String getName() {
-        return _name;
+        return name;
     }
 
     public int getBudgetMin() {
-        return _budgetMin;
+        return budgetMin;
     }
 
     public int getBudgetMax() {
-        return _budgetMax;
+        return budgetMax;
     }
 
     public BuildStyle getStyle() {
-        return _style;
+        return style;
     }
 
     public List<BuildStore> getStores() {
-        return _stores;
+        return stores;
     }
 
-    public List<Part> getParts(){ return _parts;}
+    public List<Part> getParts(){ return parts;}
 
-    public String getImageURL(){return _imageURL;}
 
-    public int getPrice(){return _price;}
+    public String getImageURL(){return imageURL;}
+
+
+    public int getPrice(){return price;}
 
     /**
      * Setters
      */
 
+    @JsonIgnore
     public void setImageURL(String url){
-        _imageURL = url;
+        imageURL = url;
         updateDB();
     }
 
+    @JsonIgnore
     public void setPrice(int price){
-        _price = price;
+        this.price = price;
         updateDB();
     }
 
 
+    @JsonIgnore
     private void updateDB(){
         DataController.getController().getBuild().updateBuild(this,null);
     }
+
+    /*
+    @Override
+    public String toString() {
+        return "Build{name='" + name + "\', budgetMin='" + budgetMin + "\', budgetMax='" + budgetMax
+                + "\', style='" + style + "\', parts='" + parts + "\', imageURL='" + imageURL +
+                "\', price='" + price + "'}";
+    }
+    */
 }

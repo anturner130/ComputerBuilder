@@ -2,32 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/navigation_item_1"
+            android:id="@+id/myProfile"
             android:checked="true"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/profile" />
         <item
-            android:id="@+id/navigation_item_2"
+            android:id="@+id/newBuild"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/new_build" />
         <item
-            android:id="@+id/navigation_item_3"
+            android:id="@+id/savedBuild"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/saved_builds" />
         <item
-            android:id="@+id/navigation_item_4"
+            android:id="@+id/myCart"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/cart" />
         <item
-            android:id="@+id/navigation_item_5"
+            android:id="@+id/settings"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/settings" />
         <item
-            android:id="@+id/navigation_item_6"
+            android:id="@+id/help"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/help" />
         <item
-            android:id="@+id/navigation_item_7"
+            android:id="@+id/logOut"
             android:icon="@drawable/computer_builder_welcome"
             android:title="@string/log_out" />
     </group>

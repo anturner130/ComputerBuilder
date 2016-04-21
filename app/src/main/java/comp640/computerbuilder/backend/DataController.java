@@ -1,6 +1,8 @@
 package comp640.computerbuilder.backend;
 
+import comp640.computerbuilder.backend.firebase.FirebaseSettings;
 import comp640.computerbuilder.backend.interfaces.IBuild;
+import comp640.computerbuilder.backend.interfaces.ISettings;
 import comp640.computerbuilder.backend.interfaces.IUser;
 import comp640.computerbuilder.backend.firebase.FirebaseBuild;
 import comp640.computerbuilder.backend.firebase.FirebaseUser;
@@ -26,6 +28,11 @@ public class DataController {
      */
     private IBuild _build;
 
+    /**
+     * The remote build backend;
+     */
+    private ISettings _settings;
+
 
     /**
      * Private constructor for singleton.
@@ -33,6 +40,7 @@ public class DataController {
     private DataController(){
         _user = new FirebaseUser();
         _build = new FirebaseBuild();
+        _settings = new FirebaseSettings();
     }
 
     /**
@@ -59,5 +67,13 @@ public class DataController {
      */
     public IBuild getBuild(){
         return _build;
+    }
+
+    /**
+     * Gets the settings backend
+     * @return the settings backend.
+     */
+    public ISettings getSettings(){
+        return _settings;
     }
 }

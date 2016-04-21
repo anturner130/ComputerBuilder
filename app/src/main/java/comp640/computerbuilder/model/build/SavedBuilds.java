@@ -15,6 +15,9 @@ public class SavedBuilds {
      */
     private List<Build> _builds;
 
+    /**
+     * Holds the listeners
+     */
     private List<OnBuildsChangedListener> _listeners;
 
     /**
@@ -25,25 +28,29 @@ public class SavedBuilds {
     /**
      * Private constructor for singleton
      */
-    private SavedBuilds(){
+    private SavedBuilds(){ }
+
+    public void init(){
         _builds = new ArrayList<>();
         _listeners = new ArrayList<>();
 
         DataController.getController().getBuild().registerOnGetBuildCompleteListener(new OnGetBuildCompleteListener() {
             @Override
             public void onBuildReceived(Build build) {
-                int i = 0;
-                for (Build temp: _builds) {
-                    if(temp.getName().equals(build.getName())) {
-                        _builds.set(i, build);
-                        return;
+                if(build != null) {
+                    int i = 0;
+                    for (Build temp : _builds) {
+                        if (temp.getName().equals(build.getName())) {
+                            _builds.set(i, build);
+                            return;
+                        }
+                        i++;
                     }
-                    i++;
-                }
-                _builds.add(build);
+                    _builds.add(build);
 
-                for (OnBuildsChangedListener listener: _listeners)
-                    listener.onBuildsChanged();
+                    for (OnBuildsChangedListener listener : _listeners)
+                        listener.onBuildsChanged();
+                }
 
 
             }

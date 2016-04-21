@@ -19,7 +19,7 @@ import comp640.computerbuilder.model.build.SavedBuilds;
  * Created by alexanderturner on 4/17/16.
  * Represents the screen of saved builds.
  */
-public class SavedBuildsListFragment extends Fragment implements OnBuildsChangedListener{
+public class SavedBuildsListFragment extends CBFragment implements OnBuildsChangedListener{
 
     private OnListFragmentInteractionListener _listener;
     private SavedBuildsViewAdapter _adapter;
@@ -29,6 +29,8 @@ public class SavedBuildsListFragment extends Fragment implements OnBuildsChanged
      * fragment (e.g. upon screen orientation changes).
      */
     public SavedBuildsListFragment() {
+        _title = "Saved Builds";
+        _index = 2;
     }
 
 
@@ -52,9 +54,10 @@ public class SavedBuildsListFragment extends Fragment implements OnBuildsChanged
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        _listener = (OnListFragmentInteractionListener) context;
+        SavedBuilds.getSingleton().registerOnBuildsChangedListener(this);
         if (context instanceof OnListFragmentInteractionListener) {
-            _listener = (OnListFragmentInteractionListener) context;
-            SavedBuilds.getSingleton().registerOnBuildsChangedListener(this);
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -71,7 +74,7 @@ public class SavedBuildsListFragment extends Fragment implements OnBuildsChanged
 
     @Override
     public void onBuildsChanged() {
-        if(_adapter != null){
+        if(_adapter != null && SavedBuilds.getSingleton().getBuilds() != null){
             _adapter.notifyDataSetChanged();
         }
     }

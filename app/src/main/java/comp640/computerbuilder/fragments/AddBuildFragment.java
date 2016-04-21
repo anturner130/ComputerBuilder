@@ -1,9 +1,7 @@
 package comp640.computerbuilder.fragments;
 
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.util.EnumValues;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import comp640.computerbuilder.R;
-import comp640.computerbuilder.fragments.listeners.OnFragmentCompleteListener;
 import comp640.computerbuilder.model.build.Build;
 import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.build.BuildStyle;
@@ -33,7 +26,7 @@ import comp640.computerbuilder.model.build.CurrentBuild;
  * Created by alexanderturner on 4/17/16.
  * Represents the screen to create a new build
  */
-public class AddBuildFragment extends Fragment implements SeekBar.OnSeekBarChangeListener,
+public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarChangeListener,
         View.OnClickListener{
 
 
@@ -78,22 +71,11 @@ public class AddBuildFragment extends Fragment implements SeekBar.OnSeekBarChang
     private Button _submitButton;
 
     /**
-     * The fragment complete listener.
-     */
-    private OnFragmentCompleteListener _listener;
-
-    /**
      * Required empty public constructor
      */
-    public AddBuildFragment(){}
-
-
-    /**
-     * Sets the OnFragmentCompleteListener
-     * @param listener the listener.
-     */
-    public void setOnFragmentCompleteListener(OnFragmentCompleteListener listener){
-        _listener = listener;
+    public AddBuildFragment(){
+        _title = "Add Build";
+        _index = 1;
     }
 
     /**
@@ -194,15 +176,16 @@ public class AddBuildFragment extends Fragment implements SeekBar.OnSeekBarChang
             }
 
             List<BuildStore> stores = new ArrayList<>();
-            stores.add(BuildStore.valueOf((String) _storesSpinner.getSelectedItem()));
+            stores.add(BuildStore.valueOf(((String) _storesSpinner.getSelectedItem())
+                    .replace(" ","_")));
 
             Build build = new Build(_nameEditText.getText().toString(),
                     _minBudgetBar.getProgress(),
                     _maxBudgetBar.getProgress(),
-                    BuildStyle.valueOf((String)_stylesSpinner.getSelectedItem()),
+                    BuildStyle.valueOf(((String)_stylesSpinner.getSelectedItem()).replace(" ", "_")),
                     stores);
             CurrentBuild.getSingleton().setCurrentBuild(build);
-            _listener.onFragmentComplete();
+            createSubfragment(new SavedBuildsListFragment());
         }
     }
 
