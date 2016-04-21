@@ -27,6 +27,8 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
 
     private final List<Build> _values;
     private final OnListFragmentInteractionListener _listener;
+    private static final String NO_IMAGE_URL = "http://www.thewoodjoynt.com" +
+            "/Content/Images/Products/NoImageAvailable.jpg";
 
     public SavedBuildsViewAdapter(List<Build> items, OnListFragmentInteractionListener listener) {
         _values = items;
@@ -43,17 +45,20 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder._item = _values.get(position);
-        if(holder._item.getImageURL() != null)
-            new DownloadImageTask(holder._imageView)
-                    .execute(holder._item.getImageURL());
+
+        String url;
+        if(holder._item.getImageURL() != null && !holder._item.getImageURL().equals(""))
+            url = holder._item.getImageURL();
+        else
+            url = NO_IMAGE_URL;
+        new DownloadImageTask(holder._imageView)
+                .execute(url);
 
 
         holder._nameView.setText(String.format("Name : %s",holder._item.getName()));
         holder._priceView.setText(String.format("Price : %s", holder._item.getPrice()));
         holder._styleView.setText(String.format("Style : %s", holder._item.getStyle().toString()));
-        holder._storesView.setText(String.format("Store(s) : %s", holder._item.getStores()));
-        holder._minBudgetView.setText(String.format("Min Budget : %s", holder._item.getBudgetMin()));
-        holder._maxBudgetView.setText(String.format("Max Budget : %s", holder._item.getBudgetMax()));
+
 
         holder._view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +83,7 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
         public final TextView _nameView;
         public final TextView _priceView;
         public final TextView _styleView;
-        public final TextView _storesView;
-        public final TextView _minBudgetView;
-        public final TextView _maxBudgetView;
+
         public Build _item;
 
         public ViewHolder(View view) {
@@ -90,9 +93,7 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
             _nameView = (TextView)view.findViewById(R.id.name);
             _priceView = (TextView)view.findViewById(R.id.price);
             _styleView = (TextView)view.findViewById(R.id.style);
-            _storesView = (TextView)view.findViewById(R.id.stores);
-            _minBudgetView = (TextView)view.findViewById(R.id.minBudget);
-            _maxBudgetView = (TextView)view.findViewById(R.id.maxBudget);
+
         }
 
     }
@@ -121,7 +122,8 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
         }
 
         protected void onPostExecute(Bitmap result) {
-            _imageView.setImageBitmap(result);
+            Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
+            _imageView.setImageBitmap(image);
         }
     }
 }

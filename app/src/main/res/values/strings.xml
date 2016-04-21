@@ -17,10 +17,10 @@
         completions."
     </string>
 
-<<<<<<< HEAD
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-=======
+
     <!-- Strings for items related to the side menu-->
     <string-array name="drawer_items">
         <item>My Profile</item>

@@ -20,7 +20,7 @@ import comp640.computerbuilder.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class PartListFragment extends Fragment {
+public class PartListFragment extends CBFragment {
 
     /**
      * The fragment interaction listener.

@@ -13,24 +13,11 @@ import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
  * Created by alexanderturner on 4/11/16.
  * Represents the user methods to access the remote db
  */
-public class FirebaseUser implements IUser{
-
-    /**
-     * The reference to the DB.
-     */
-    private Firebase _reference;
-
+public class FirebaseUser extends FirebaseBase implements IUser{
     /**
      * The email of the current user;
      */
     private String _email;
-
-    /**
-     * Constructor to initialize the local variables
-     */
-    public FirebaseUser(){
-        _reference = FirebaseReference.getSingleton().getReference();
-    }
 
     /**
      * Attempts logging in.
