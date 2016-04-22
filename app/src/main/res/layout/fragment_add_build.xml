@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buildName"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -59,10 +60,11 @@
 
         <SeekBar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
             android:id="@+id/minBudgetBar"
-            android:layout_gravity="center_horizontal"
-            android:indeterminate="false" />
+            android:indeterminate="false"
+            android:thumbTint="@color/colorPrimary"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -86,9 +88,12 @@
 
         <SeekBar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
             android:id="@+id/maxBudgetBar"
-            android:indeterminate="false" />
+            android:indeterminate="false"
+            android:thumbTint="@color/colorPrimary"
+            />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -139,7 +144,12 @@
             android:layout_height="wrap_content"
             android:text="Start Building"
             android:id="@+id/submitButton"
-            android:layout_gravity="center_horizontal" />
+            android:textColor="@color/colorButtonText"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"/>
 
 
     </LinearLayout>
