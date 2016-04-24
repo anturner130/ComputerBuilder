@@ -1,8 +1,16 @@
 package comp640.computerbuilder.fragments;
 
 
+import android.annotation.TargetApi;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -14,7 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.model.build.Build;
@@ -85,6 +96,7 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
      * @param savedInstanceState the bundle
      * @return the view
      */
+    @TargetApi(16)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -106,6 +118,18 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
         _minBudgetBar.setMax(1000);
         _maxBudgetBar.setMax(1000);
 
+        int srcColor = getResources().getColor(R.color.colorPrimary);
+        _minBudgetBar.getProgressDrawable()
+                .setColorFilter(new PorterDuffColorFilter(srcColor, PorterDuff.Mode.SRC_IN));
+        _maxBudgetBar.getProgressDrawable()
+                .setColorFilter(new PorterDuffColorFilter(srcColor, PorterDuff.Mode.SRC_IN));
+        _minBudgetBar.getThumb()
+                .setColorFilter(new PorterDuffColorFilter(srcColor, PorterDuff.Mode.SRC_IN));
+        _maxBudgetBar.getThumb()
+                .setColorFilter(new PorterDuffColorFilter(srcColor, PorterDuff.Mode.SRC_IN));
+        _nameEditText.getBackground()
+                .setColorFilter(new PorterDuffColorFilter(srcColor, PorterDuff.Mode.SRC_IN));
+
         _stylesSpinner.setAdapter(new ArrayAdapter<String>(getContext(),
                 R.layout.support_simple_spinner_dropdown_item, getStyles()));
         _storesSpinner.setAdapter(new ArrayAdapter<String>(getContext(),
@@ -120,20 +144,46 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        if(seekBar == _minBudgetBar){
-            if(_maxBudgetBar.getProgress() < _minBudgetBar.getProgress())
-                _maxBudgetBar.setProgress(_maxBudgetBar.getProgress());
-        }
+    public void onProgressChanged(final SeekBar seekBar, int i, boolean b) {
+        try {
 
-        if(seekBar.getProgress() >= seekBar.getMax()) {
-            seekBar.setMax(seekBar.getMax() * 2);
-            seekBar.clearFocus();
-        }
+            int minProgress = _minBudgetBar.getProgress();
+            int maxProgress = _maxBudgetBar.getProgress();
 
-        //Display
-        _minBudgetTextView.setText("$ " + _minBudgetBar.getProgress());
-        _maxBudgetTextView.setText("$ " + _maxBudgetBar.getProgress());
+            if (maxProgress < minProgress)
+                _maxBudgetBar.setProgress(minProgress);
+
+
+            if (seekBar.getProgress() >= seekBar.getMax()) {
+                seekBar.setEnabled(false);
+                seekBar.setFocusable(false);
+                seekBar.setClickable(false);
+                seekBar.clearFocus();
+                seekBar.setMax(seekBar.getMax() * 2);
+            }
+
+            if (seekBar.getProgress() == 0) {
+                seekBar.setMax(500);
+            }
+
+            //Display
+            _minBudgetTextView.setText("$ " + _minBudgetBar.getProgress());
+            _maxBudgetTextView.setText("$ " + _maxBudgetBar.getProgress());
+
+            if (!seekBar.isEnabled()) {
+                Handler handler = new Handler(Looper.myLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        seekBar.setEnabled(true);
+                        seekBar.setFocusable(true);
+                        seekBar.setClickable(true);
+                    }
+                }, 250);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -196,7 +246,6 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 
 

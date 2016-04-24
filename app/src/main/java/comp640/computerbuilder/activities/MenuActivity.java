@@ -162,6 +162,8 @@ public class MenuActivity extends AppCompatActivity
     private void inflateFragment(CBFragment fragment){
         if (fragment!=null) {
             _drawerLayout.closeDrawer(GravityCompat.START);
+            if(_fragment != null && fragment.getClass().equals(_fragment.getClass()))
+                return;
             _toolbar.setTitle(fragment.getTitle());
             if(fragment.getIndex()!= -1)
                 _navigationView.getMenu().getItem(fragment.getIndex()).setChecked(true);
