@@ -42,7 +42,8 @@ public class FirebaseSettings extends FirebaseBase implements ISettings {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                listener.onSettingReceived((boolean)dataSnapshot.getValue());
+                if(dataSnapshot.getValue() != null)
+                    listener.onSettingReceived((boolean)dataSnapshot.getValue());
             }
 
             @Override
@@ -60,7 +61,8 @@ public class FirebaseSettings extends FirebaseBase implements ISettings {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                listener.onSettingReceived((boolean)dataSnapshot.getValue());
+                if(dataSnapshot.getValue() != null)
+                    listener.onSettingReceived((boolean)dataSnapshot.getValue());
             }
 
             @Override
