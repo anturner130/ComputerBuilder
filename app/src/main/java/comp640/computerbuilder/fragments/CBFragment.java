@@ -1,5 +1,8 @@
 package comp640.computerbuilder.fragments;
 
+import java.util.HashMap;
+
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 
 /**
@@ -16,6 +19,8 @@ public class CBFragment extends android.support.v4.app.Fragment {
 
     public String getTitle(){return _title;}
 
+    HashMap<Integer,OnOptionClickedListener> _options;
+
     public void setOnSubfragmentListener(OnSubfragmentListener listener){
         _listener = listener;
     }
@@ -26,6 +31,14 @@ public class CBFragment extends android.support.v4.app.Fragment {
 
     protected void removeSubfragment(CBFragment fragment){
         _listener.onRemoveSubfragment(fragment);
+    }
+
+    public void addMenuOption(int resourceId, OnOptionClickedListener listener){
+        _options.put(resourceId, listener);
+    }
+
+    public OnOptionClickedListener getOptionClickedListener(int resourceId){
+        return _options.get(resourceId);
     }
 
     public int getParentID(){return _parentID;}
