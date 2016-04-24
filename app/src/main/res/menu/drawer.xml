@@ -8,7 +8,7 @@
             android:title="@string/profile" />
         <item
             android:id="@+id/newBuild"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@android:drawable/ic_menu_add"
             android:title="@string/new_build" />
         <item
             android:id="@+id/savedBuild"

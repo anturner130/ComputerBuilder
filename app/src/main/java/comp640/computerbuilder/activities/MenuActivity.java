@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,6 +25,7 @@ import comp640.computerbuilder.fragments.HelpFragment;
 import comp640.computerbuilder.fragments.PartListFragment;
 import comp640.computerbuilder.fragments.SavedBuildsListFragment;
 import comp640.computerbuilder.fragments.SettingsFragment;
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.model.build.Build;
 
@@ -41,11 +43,13 @@ public class MenuActivity extends AppCompatActivity
     NavigationView _navigationView;
     FrameLayout _contentFrame;
     CBFragment _fragment;
+    private HashMap<Integer, OnOptionClickedListener> _optionsMap;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         //Set the content View to the default view
         setContentView(R.layout.activity_menu);
@@ -67,7 +71,14 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu);
+        _optionsMap = new HashMap<>();
+        int index = 0;
+        for (int option:_fragment.getOptionsMenu().keySet()) {
+            getMenuInflater().inflate(option, menu);
+            _optionsMap.put(menu.getItem(index).getItemId(),_fragment.getOptionsMenu().get(option));
+            index++;
+        }
         return true;
     }
 
@@ -78,15 +89,14 @@ public class MenuActivity extends AppCompatActivity
             selectFragmentFromResource(_fragment.getParentID());
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
+        super.onOptionsItemSelected(item);
+        OnOptionClickedListener listener = _optionsMap.get(item.getItemId());
+        if(listener!= null)
+            listener.onClick();
+        return true;
+    }
 
     /**
      * Sets up the toolbar
