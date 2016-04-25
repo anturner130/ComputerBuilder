@@ -83,7 +83,7 @@ public class MenuActivity extends AppCompatActivity
         setUpNavDrawer();
 
         //Inflate the fragment
-        inflateFragment(new CartFragment());
+        inflateFragment(new SavedBuildsListFragment());
     }
 
     @Override
