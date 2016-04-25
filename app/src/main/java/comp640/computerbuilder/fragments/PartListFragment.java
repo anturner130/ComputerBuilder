@@ -31,6 +31,8 @@ public class PartListFragment extends CBFragment {
     }
 
     public List<Part> content;
+
+
     /**
      * The fragment interaction listener.
      */

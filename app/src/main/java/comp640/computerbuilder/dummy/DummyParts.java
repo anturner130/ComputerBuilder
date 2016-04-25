@@ -26,7 +26,7 @@ public class DummyParts {
             "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
         dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
                 "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
-        dummy.add(new Part(167,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
+        dummy.add(new Part(167,"GeForce 770R", BuildStore.Newegg, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
             "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
         dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
                 "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
@@ -36,7 +36,7 @@ public class DummyParts {
                 "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
         dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
             "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(30,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
+        dummy.add(new Part(30,"GeForce 770R", BuildStore.Newegg, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
                 "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
     }
 

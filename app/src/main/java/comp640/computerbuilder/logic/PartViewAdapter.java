@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.PartListFragment.OnListFragmentInteractionListener;
+import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 
 import java.io.BufferedInputStream;
@@ -63,6 +64,18 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         }else{
             holder.mImageView.setImageBitmap(holder.mItem.getImage());
         }
+        switch (holder.mItem.getStore())
+        {
+            case Amazon:
+                holder.mStoreView.setImageResource(R.mipmap.ic_amazon);
+                break;
+            case Newegg:
+                holder.mStoreView.setImageResource(R.mipmap.ic_newegg);
+                break;
+            case Multiple_Stores:
+
+                break;
+        }
 
 
 
@@ -96,6 +109,7 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         public final TextView mContentView;
         public final ImageView mImageView;
         public final TextView mPriceView;
+        public final ImageView mStoreView;
         public Part mItem;
 
         public ViewHolder(View view) {
@@ -105,6 +119,7 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
             mContentView = (TextView) view.findViewById(R.id.content);
             mImageView = (ImageView) view.findViewById(R.id.imageView);
             mPriceView = (TextView) view.findViewById(R.id.part_price);
+            mStoreView = (ImageView) view.findViewById(R.id.ic_store);
         }
 
         @Override

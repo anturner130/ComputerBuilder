@@ -13,7 +13,6 @@
             android:id="@+id/textView2"
             android:textSize="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_alignBottom="@+id/button"
             />
 
         <Button
@@ -25,26 +24,18 @@
             android:layout_margin="5dp"/>
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="25dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="#373fac"
-        >
+
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Items In Cart"
+            android:text="   Items In Cart"
             android:id="@+id/textView3"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="#ffffff" />
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorButtonText"
+            />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,8 +52,7 @@
             app:layoutManager="LinearLayoutManager"
             tools:context=".fragments.PartListFragment"
             tools:listitem="@layout/fragment_part"
-            android:choiceMode = "singleChoice"
-        />
+            android:choiceMode = "singleChoice" />
     </FrameLayout>
 
 
