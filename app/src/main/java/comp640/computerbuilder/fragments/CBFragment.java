@@ -1,16 +1,20 @@
 package comp640.computerbuilder.fragments;
 
+import android.support.v4.app.Fragment;
+
+
+import java.util.List;
+
 import android.view.MenuItem;
 
 import java.util.HashMap;
-
-import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
+import comp640.computerbuilder.model.parts.Part;
 
 /**
  * Created by alexanderturner on 4/18/16.
  */
-public class CBFragment extends android.support.v4.app.Fragment {
+public class CBFragment extends Fragment {
     private OnSubfragmentListener _listener;
 
     protected int _parentID = -1;
@@ -18,6 +22,7 @@ public class CBFragment extends android.support.v4.app.Fragment {
     protected String _title;
 
     protected int _index =-1;
+
 
     public String getTitle(){return _title;}
 
@@ -50,4 +55,6 @@ public class CBFragment extends android.support.v4.app.Fragment {
     public int getParentID(){return _parentID;}
 
     public int getIndex(){return _index;}
+
+
 }

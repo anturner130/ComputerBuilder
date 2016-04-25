@@ -1,22 +1,30 @@
 package comp640.computerbuilder.activities;
 
+import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.dummy.DummyContent;
+import comp640.computerbuilder.dummy.DummyParts;
 import comp640.computerbuilder.fragments.AddBuildFragment;
 import comp640.computerbuilder.fragments.CBFragment;
 import comp640.computerbuilder.fragments.CartFragment;
@@ -27,7 +35,11 @@ import comp640.computerbuilder.fragments.SavedBuildsListFragment;
 import comp640.computerbuilder.fragments.SettingsFragment;
 import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
+import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.model.build.Build;
+import comp640.computerbuilder.model.build.BuildStore;
+import comp640.computerbuilder.model.parts.Part;
+import comp640.computerbuilder.model.parts.PartType;
 
 /*
 * Activity that handles all fragments that use the menu
@@ -45,6 +57,11 @@ public class MenuActivity extends AppCompatActivity
     CBFragment _fragment;
     private HashMap<Integer, OnOptionClickedListener> _optionsMap;
 
+    @Override
+    public void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position) {
+        Log.v("Pos", "Position" + position);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +158,7 @@ public class MenuActivity extends AppCompatActivity
         CBFragment frag = null;
         switch (id) {
             case R.id.myProfile:
-                //frag = new ProfileFragment();
+                frag = new PartListFragment();
                 break;
             case R.id.newBuild:
                 frag = new AddBuildFragment();
@@ -166,6 +183,7 @@ public class MenuActivity extends AppCompatActivity
                 break;
         }
         inflateFragment(frag);
+
     }
 
 
@@ -196,10 +214,6 @@ public class MenuActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 
     @Override
     public void onListFragmentInteraction(Build item) {
