@@ -1,5 +1,5 @@
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +31,8 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#373fac">
+        android:background="#373fac"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,5 +45,25 @@
             android:layout_alignParentStart="true"
             android:textColor="#ffffff" />
     </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_cart">
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:name="comp640.computerbuilder.PartListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".fragments.PartListFragment"
+            tools:listitem="@layout/fragment_part"
+            android:choiceMode = "singleChoice"
+        />
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.dummy.DummyContent;
 import comp640.computerbuilder.dummy.DummyContent.DummyItem;
+import comp640.computerbuilder.model.parts.Part;
 
 /**
  * A fragment representing a list of Items.
@@ -22,6 +26,11 @@ import comp640.computerbuilder.dummy.DummyContent.DummyItem;
  */
 public class PartListFragment extends CBFragment {
 
+    public void setContent(List<Part> content) {
+        this.content = content;
+    }
+
+    public List<Part> content;
     /**
      * The fragment interaction listener.
      */
@@ -32,6 +41,7 @@ public class PartListFragment extends CBFragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public PartListFragment() {
+
     }
 
     /**
@@ -52,7 +62,7 @@ public class PartListFragment extends CBFragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new PartViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new PartViewAdapter(content, mListener));
         }
         return view;
     }
@@ -87,6 +97,7 @@ public class PartListFragment extends CBFragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
+        void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position);
     }
 }

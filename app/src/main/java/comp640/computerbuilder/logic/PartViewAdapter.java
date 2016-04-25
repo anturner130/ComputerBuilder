@@ -1,15 +1,28 @@
 package comp640.computerbuilder.logic;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.PartListFragment.OnListFragmentInteractionListener;
-import comp640.computerbuilder.dummy.DummyContent.DummyItem;
+import comp640.computerbuilder.model.parts.Part;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -22,10 +35,10 @@ import java.util.List;
  */
 public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Part> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public PartViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public PartViewAdapter(List<Part> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -38,10 +51,27 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getName());
+        holder.mContentView.setText(mValues.get(position).getDescription());
+        holder.mPriceView.setText("$"+holder.mItem.getPrice());
+        if(holder.mItem.getImage() == null) {
+            String url = holder.mItem.getUrl();
+            new DownloadImageTask(holder.mImageView, holder.mItem)
+                    .execute(url);
+        }else{
+            holder.mImageView.setImageBitmap(holder.mItem.getImage());
+        }
+
+
+
+
+
+
+
+
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +79,7 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder, position);
                 }
             }
         });
@@ -64,18 +94,51 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView mImageView;
+        public final TextView mPriceView;
+        public Part mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
+            mImageView = (ImageView) view.findViewById(R.id.imageView);
+            mPriceView = (TextView) view.findViewById(R.id.part_price);
         }
 
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView _imageView;
+        Part _part;
+
+        public DownloadImageTask(ImageView imageView, Part part) {
+            _imageView = imageView;
+            this._part = part;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap image = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                image = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return image;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
+            _part.setImage(image);
+            _imageView.setImageBitmap(image);
         }
     }
 }
