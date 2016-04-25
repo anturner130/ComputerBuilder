@@ -1,6 +1,7 @@
 package comp640.computerbuilder.activities;
 
 import android.content.Intent;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.firebase.client.Firebase;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.activities.MainActivity;
@@ -60,9 +62,15 @@ public class WelcomeActivity extends AppCompatActivity {
      * Initializes the database
      */
     private void initializeDB(){
-        FirebaseReference.getSingleton().Initialize(getApplicationContext());
-        SavedBuilds.getSingleton().init();
-        SettingsReference.getReference().init();
+        try {
+            FirebaseReference.getSingleton().Initialize(getApplicationContext());
+            DataController.getController().Initialize(getApplicationContext());
+            SavedBuilds.getSingleton().init();
+            SettingsReference.getReference().init();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**

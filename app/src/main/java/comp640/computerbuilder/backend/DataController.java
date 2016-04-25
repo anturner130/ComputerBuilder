@@ -1,5 +1,11 @@
 package comp640.computerbuilder.backend;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
+
+import comp640.computerbuilder.backend.firebase.FirebaseReference;
 import comp640.computerbuilder.backend.firebase.FirebaseSettings;
 import comp640.computerbuilder.backend.interfaces.IBuild;
 import comp640.computerbuilder.backend.interfaces.ISettings;
@@ -12,6 +18,11 @@ import comp640.computerbuilder.backend.firebase.FirebaseUser;
  * Provides access to the backend
  */
 public class DataController {
+
+    /**
+     * The android context;
+     */
+    private static Context _context;
 
     /**
      * The singleton instance.
@@ -50,7 +61,16 @@ public class DataController {
     public static DataController getController(){
         if(_dataController == null)
             _dataController = new DataController();
+        checkNetworkStatus();
         return _dataController;
+    }
+
+    /**
+     * Initializes the data controller with the android context;
+     * @param context the context
+     */
+    public void Initialize(Context context){
+        _context = context;
     }
 
     /**
@@ -75,5 +95,28 @@ public class DataController {
      */
     public ISettings getSettings(){
         return _settings;
+    }
+
+    /**
+     * Checks the network status
+     */
+    private static void checkNetworkStatus(){
+        if(_context!= null && !isNetworkAvailable())
+            Toast.makeText(_context,"Please connect to wifi to use the application",
+                    Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Checks to see if the network is available;
+     * @return the network status
+     */
+    public static boolean isNetworkAvailable() {
+        if(_context != null){
+            ConnectivityManager connectivityManager
+                    = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 }

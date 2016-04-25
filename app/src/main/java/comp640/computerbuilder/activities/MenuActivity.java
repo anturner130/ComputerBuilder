@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -32,6 +33,7 @@ import comp640.computerbuilder.fragments.HelpFragment;
 import comp640.computerbuilder.fragments.PartListFragment;
 import comp640.computerbuilder.fragments.SavedBuildsListFragment;
 import comp640.computerbuilder.fragments.SettingsFragment;
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.model.build.Build;
@@ -53,6 +55,7 @@ public class MenuActivity extends AppCompatActivity
     NavigationView _navigationView;
     FrameLayout _contentFrame;
     CBFragment _fragment;
+    private HashMap<Integer, OnOptionClickedListener> _optionsMap;
 
     @Override
     public void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position) {
@@ -63,6 +66,7 @@ public class MenuActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         //Set the content View to the default view
         setContentView(R.layout.activity_menu);
@@ -84,7 +88,14 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu);
+        _optionsMap = new HashMap<>();
+        int index = 0;
+        for (int option:_fragment.getOptionsMenu().keySet()) {
+            getMenuInflater().inflate(option, menu);
+            _optionsMap.put(menu.getItem(index).getItemId(),_fragment.getOptionsMenu().get(option));
+            index++;
+        }
         return true;
     }
 
@@ -95,15 +106,14 @@ public class MenuActivity extends AppCompatActivity
             selectFragmentFromResource(_fragment.getParentID());
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
+        super.onOptionsItemSelected(item);
+        OnOptionClickedListener listener = _optionsMap.get(item.getItemId());
+        if(listener!= null)
+            listener.onClick();
+        return true;
+    }
 
     /**
      * Sets up the toolbar
@@ -148,12 +158,7 @@ public class MenuActivity extends AppCompatActivity
         CBFragment frag = null;
         switch (id) {
             case R.id.myProfile:
-                DummyParts parts = new DummyParts();
-                //for(int i = 0; i < 10; i++)
-                 //   parts.add(new Part(1,"comp", BuildStore.Amazon, "the", "Intel", PartType.Audio_Video_Card));
                 frag = new PartListFragment();
-                ((PartListFragment)frag).setContent(parts.getParts());
-                //frag.setContent(parts);
                 break;
             case R.id.newBuild:
                 frag = new AddBuildFragment();
@@ -185,6 +190,8 @@ public class MenuActivity extends AppCompatActivity
     private void inflateFragment(CBFragment fragment){
         if (fragment!=null) {
             _drawerLayout.closeDrawer(GravityCompat.START);
+            if(_fragment != null && fragment.getClass().equals(_fragment.getClass()))
+                return;
             _toolbar.setTitle(fragment.getTitle());
             if(fragment.getIndex()!= -1)
                 _navigationView.getMenu().getItem(fragment.getIndex()).setChecked(true);

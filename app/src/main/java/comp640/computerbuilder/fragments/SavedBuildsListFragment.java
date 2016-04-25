@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import comp640.computerbuilder.R;
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.logic.SavedBuildsViewAdapter;
 import comp640.computerbuilder.model.build.Build;
 import comp640.computerbuilder.model.build.OnBuildsChangedListener;
@@ -31,6 +32,12 @@ public class SavedBuildsListFragment extends CBFragment implements OnBuildsChang
     public SavedBuildsListFragment() {
         _title = "Saved Builds";
         _index = 2;
+        addMenuOption(R.menu.add_build, new OnOptionClickedListener() {
+            @Override
+            public void onClick() {
+                createSubfragment(new AddBuildFragment());
+            }
+        });
     }
 
 

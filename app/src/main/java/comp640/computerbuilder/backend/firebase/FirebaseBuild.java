@@ -68,12 +68,14 @@ public class FirebaseBuild extends FirebaseBase implements IBuild {
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                listener.onBuildReceived(dataSnapshot.getValue(Build.class));
+                if(dataSnapshot.getValue() != null)
+                    listener.onBuildReceived(dataSnapshot.getValue(Build.class));
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                listener.onBuildReceived(dataSnapshot.getValue(Build.class));
+                if(dataSnapshot.getValue() != null)
+                    listener.onBuildReceived(dataSnapshot.getValue(Build.class));
             }
 
             @Override
