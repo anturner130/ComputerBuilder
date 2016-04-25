@@ -32,6 +32,7 @@ import comp640.computerbuilder.model.build.Build;
 import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.build.BuildStyle;
 import comp640.computerbuilder.model.build.CurrentBuild;
+import comp640.computerbuilder.model.build.SavedBuilds;
 
 /**
  * Created by alexanderturner on 4/17/16.
@@ -87,6 +88,7 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
     public AddBuildFragment(){
         _title = "Add Build";
         _index = 1;
+        _parentID = R.id.savedBuild;
     }
 
     /**
@@ -220,6 +222,11 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
                 return;
             }
 
+            if(!checkNameEligible(_nameEditText.getText().toString())){
+                Toast.makeText(getContext(),"Error: Build name already exists", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if(_maxBudgetBar.getProgress() == 0){
                 Toast.makeText(getContext(),"Error: Max budget is 0", Toast.LENGTH_SHORT).show();
                 return;
@@ -235,8 +242,20 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
                     BuildStyle.valueOf(((String)_stylesSpinner.getSelectedItem()).replace(" ", "_")),
                     stores);
             CurrentBuild.getSingleton().setCurrentBuild(build);
-            createSubfragment(new SavedBuildsListFragment());
+            createSubfragment(new ComputerBreakdownFragment());
         }
+    }
+
+    /**
+     * Checks to see if the name is in use already
+     * @return true if the name is eligible
+     */
+    private boolean checkNameEligible(String name){
+        for (Build build: SavedBuilds.getSingleton().getBuilds()) {
+            if(build.getName().equals(name))
+                return false;
+        }
+        return true;
     }
 
     @Override

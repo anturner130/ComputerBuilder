@@ -29,6 +29,7 @@ import comp640.computerbuilder.fragments.AddBuildFragment;
 import comp640.computerbuilder.fragments.CBFragment;
 import comp640.computerbuilder.fragments.CartFragment;
 import comp640.computerbuilder.R;
+import comp640.computerbuilder.fragments.ComputerBreakdownFragment;
 import comp640.computerbuilder.fragments.HelpFragment;
 import comp640.computerbuilder.fragments.PartListFragment;
 import comp640.computerbuilder.fragments.SavedBuildsListFragment;
@@ -37,9 +38,13 @@ import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.model.build.Build;
+<<<<<<< HEAD
+import comp640.computerbuilder.model.build.CurrentBuild;
+=======
 import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
+>>>>>>> master
 
 /*
 * Activity that handles all fragments that use the menu
@@ -93,7 +98,7 @@ public class MenuActivity extends AppCompatActivity
         int index = 0;
         for (int option:_fragment.getOptionsMenu().keySet()) {
             getMenuInflater().inflate(option, menu);
-            _optionsMap.put(menu.getItem(index).getItemId(),_fragment.getOptionsMenu().get(option));
+            _optionsMap.put(menu.getItem(index).getItemId(), _fragment.getOptionsMenu().get(option));
             index++;
         }
         return true;
@@ -193,8 +198,10 @@ public class MenuActivity extends AppCompatActivity
             if(_fragment != null && fragment.getClass().equals(_fragment.getClass()))
                 return;
             _toolbar.setTitle(fragment.getTitle());
-            if(fragment.getIndex()!= -1)
+           if(fragment.getIndex()!= -1)
                 _navigationView.getMenu().getItem(fragment.getIndex()).setChecked(true);
+            else if(_fragment!= null)
+               _navigationView.getMenu().getItem(_fragment.getIndex()).setChecked(false);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.nav_contentframe, fragment).commit();
             invalidateOptionsMenu();
@@ -217,7 +224,8 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Build item) {
-
+        CurrentBuild.getSingleton().setCurrentBuild(item);
+        inflateFragment(new ComputerBreakdownFragment());
     }
 
 }

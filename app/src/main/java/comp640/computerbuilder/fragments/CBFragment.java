@@ -5,13 +5,9 @@ import android.support.v4.app.Fragment;
 
 import java.util.List;
 
-
 import android.view.MenuItem;
 
 import java.util.HashMap;
-
-import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
-
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.model.parts.Part;
 
