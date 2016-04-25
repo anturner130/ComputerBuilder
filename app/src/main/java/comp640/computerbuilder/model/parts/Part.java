@@ -1,5 +1,7 @@
 package comp640.computerbuilder.model.parts;
 
+import android.graphics.Bitmap;
+
 import comp640.computerbuilder.model.build.BuildStore;
 
 /**
@@ -14,16 +16,21 @@ public class Part {
     private String _description;
     private String _brand;
     private PartType _type;
+    private String _url;
+    private Bitmap _image;
 
     public Part(int price, String name, BuildStore store, String description,
-                String brand, PartType type){
+                String brand, PartType type, String url){
         setPrice(price);
         setName(name);
         setStore(store);
         setDescription(description);
         setBrand(brand);
         setType(type);
+        setUrl(url);
+        _image = null;
     }
+
 
     public int getPrice() {
         return _price;
@@ -73,4 +80,14 @@ public class Part {
     public void setType(PartType _type) {
         this._type = _type;
     }
+
+    public void setUrl(String _url) {this._url = _url;}
+
+    public String getUrl() {return _url;}
+
+    public void setImage(Bitmap _image) {this._image = _image;}
+
+    public Bitmap getImage() {return _image;}
+
+
 }
