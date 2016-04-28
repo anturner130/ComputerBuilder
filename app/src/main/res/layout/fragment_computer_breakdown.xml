@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         android:text="Budget Remaining"
         android:layout_gravity="left"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_weight="7"/>
 
@@ -37,16 +38,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Parts"
+        android:textStyle="bold"
         android:layout_gravity="left"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_weight="10"/>
 
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
-        android:id="@+id/partsListView"
+        android:id="@+id/partsRecyclerView"
         android:layout_gravity="center_horizontal" />
 
     <FrameLayout
