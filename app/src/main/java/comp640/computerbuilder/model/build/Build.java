@@ -124,13 +124,6 @@ public class Build {
     }
 
     @JsonIgnore
-    public void setPrice(int price){
-        this.price = price;
-        updateDB();
-    }
-
-
-    @JsonIgnore
     private void updateDB(){
         DataController.getController().getBuild().updateBuild(this, null);
     }
@@ -147,6 +140,18 @@ public class Build {
         if(parts == null)
             parts = new HashMap<>();
         parts.put(part.getType().toString(), part);
+        setPriceFromParts();
         updateDB();
+    }
+
+    /**
+     * Sets the price based on the parts
+     */
+    @JsonIgnore
+    private void setPriceFromParts(){
+        price = 0;
+        for (int i = 0; i < parts.keySet().size(); i++){
+            price += parts.get(parts.keySet().toArray()[i]).getPrice();
+        }
     }
 }

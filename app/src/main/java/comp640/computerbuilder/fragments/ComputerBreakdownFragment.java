@@ -27,6 +27,11 @@ public class ComputerBreakdownFragment extends CBFragment implements View.OnClic
     /**
      * The text view for the budget;
      */
+    private TextView _priceTextView;
+
+    /**
+     * The text view for the budget;
+     */
     private TextView _budgetTextView;
 
     /**
@@ -53,12 +58,13 @@ public class ComputerBreakdownFragment extends CBFragment implements View.OnClic
         View view = inflater.inflate(R.layout.fragment_computer_breakdown, container, false);
 
         _budgetTextView = (TextView)view.findViewById(R.id.budgetTextView);
+        _priceTextView = (TextView)view.findViewById(R.id.priceTextView);
         _partsRecyclerView = (RecyclerView)view.findViewById(R.id.partsRecyclerView);
         _submitButton = (Button) view.findViewById(R.id.submitButton);
 
         _submitButton.setOnClickListener(this);
 
-        setupBudgetText();
+        setupTextViews();
         setupPartsListView();
 
         return view;
@@ -67,7 +73,7 @@ public class ComputerBreakdownFragment extends CBFragment implements View.OnClic
     @Override
     public void onResume() {
         super.onResume();
-        setupBudgetText();
+        setupTextViews();
         setupPartsListView();
     }
 
@@ -77,10 +83,12 @@ public class ComputerBreakdownFragment extends CBFragment implements View.OnClic
             tryFinishBuild();
     }
 
-    private void setupBudgetText(){
-        if(_budgetTextView != null){
+    private void setupTextViews(){
+        if(_budgetTextView != null && _priceTextView != null){
+            int price = CurrentBuild.getSingleton().getCurrentBuild().getPrice();
             int budgetRemaining = CurrentBuild.getSingleton().getCurrentBuild().getBudgetMax() -
-                    CurrentBuild.getSingleton().getCurrentBuild().getPrice();
+                    price;
+            _priceTextView.setText("$" + price );
             _budgetTextView.setText("$" + budgetRemaining);
         }
 
