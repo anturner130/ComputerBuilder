@@ -1,5 +1,6 @@
 package comp640.computerbuilder.logic;
 
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class BreakdownViewAdapter extends RecyclerView.Adapter<BreakdownViewAdap
         {
             Part part = _build.getPart(holder._item);
             if(part != null){
+                holder._view.setBackgroundColor(Color.parseColor("#E5FFE5"));
                 List<Part> parts = new ArrayList<>();
                 parts.add(part);
                 PartViewAdapter adapter = new PartViewAdapter(parts,null);
@@ -64,6 +66,26 @@ public class BreakdownViewAdapter extends RecyclerView.Adapter<BreakdownViewAdap
                         (ViewGroup) holder._view, 0);
                 adapter.onBindViewHolder(viewHolder,0);
                 holder._partView.addView(viewHolder.mView);
+                viewHolder.mView.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (null != _listener) {
+                            // Notify the active callbacks interface (the activity, if the
+                            // fragment is attached to one) that an item has been selected.
+                            _listener.onInteraction(holder, position);
+                        }
+                    }
+                }));
+                holder._partView.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (null != _listener) {
+                            // Notify the active callbacks interface (the activity, if the
+                            // fragment is attached to one) that an item has been selected.
+                            _listener.onInteraction(holder, position);
+                        }
+                    }
+                }));
             }
         }
 

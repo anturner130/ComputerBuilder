@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import comp640.computerbuilder.dummy.DummyParts;
+import comp640.computerbuilder.logic.PartFilter;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.model.parts.Part;
@@ -46,6 +47,7 @@ public class PartListFragment extends CBFragment {
      */
     public PartListFragment() {
         _parentID = R.layout.fragment_computer_breakdown;
+        PartFilter.getFilter().resetDefaultValues();
     }
 
     /**
@@ -66,7 +68,8 @@ public class PartListFragment extends CBFragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new PartViewAdapter(content, mListener));
+            recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
+                    , mListener));
         }
         return view;
     }
