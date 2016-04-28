@@ -77,7 +77,7 @@ public class FirebaseUser extends FirebaseBase implements IUser{
      */
     @Override
     public boolean isLoggedIn() {
-        return _reference.getAuth() != null;
+        return _email != null;
     }
 
     /**
@@ -86,7 +86,12 @@ public class FirebaseUser extends FirebaseBase implements IUser{
      */
     @Override
     public String getEmail() {
-        return _email;
+        String email = _email.replace(".","");
+        email = email.replace("#","");
+        email = email.replace("$","");
+        email = email.replace("[", "");
+        email = email.replace("]", "");
+        return email;
     }
 
 }
