@@ -38,13 +38,11 @@ import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.model.build.Build;
-<<<<<<< HEAD
 import comp640.computerbuilder.model.build.CurrentBuild;
-=======
 import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
->>>>>>> master
+
 
 /*
 * Activity that handles all fragments that use the menu
