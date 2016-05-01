@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.Locale;
@@ -22,6 +23,8 @@ import comp640.computerbuilder.dummy.DummyParts;
  */
 public class CartFragment extends CBFragment {
 
+    Button _checkOut;
+
     public CartFragment(){
         _title = "My Cart";
         _index = 3;
@@ -31,8 +34,21 @@ public class CartFragment extends CBFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        //Link the checkout button and set it's on click listener
+        _checkOut = (Button) container.findViewById(R.id.button_checkout);
+        _checkOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //Create a new part list fragment and insert it into this fragment
         Fragment fragment = new PartListFragment();
+        //Set the content of the cart
         ((PartListFragment)fragment).setContent(new DummyParts().getParts());
+        //Use the child fragment manager to nest fragments
         getChildFragmentManager().beginTransaction().add(R.id.list_cart, fragment).commit();
         getChildFragmentManager().executePendingTransactions();
 
