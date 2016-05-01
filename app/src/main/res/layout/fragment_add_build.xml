@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Build Name"
+            android:textStyle="bold"
             android:id="@+id/textView2" />
 
         <EditText
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Budget"
+            android:textStyle="bold"
             android:id="@+id/textView3" />
 
         <LinearLayout
@@ -106,6 +108,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Stores"
+            android:textStyle="bold"
             android:id="@+id/textView6" />
 
         <Spinner
@@ -125,6 +128,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Styles"
+            android:textStyle="bold"
             android:id="@+id/textView7" />
 
         <Spinner

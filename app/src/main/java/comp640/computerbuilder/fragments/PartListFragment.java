@@ -2,21 +2,20 @@ package comp640.computerbuilder.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import comp640.computerbuilder.dummy.DummyParts;
+import comp640.computerbuilder.logic.PartFilter;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.R;
-import comp640.computerbuilder.dummy.DummyContent;
-import comp640.computerbuilder.dummy.DummyContent.DummyItem;
 import comp640.computerbuilder.model.parts.Part;
+import comp640.computerbuilder.model.parts.PartType;
 
 /**
  * A fragment representing a list of Items.
@@ -27,7 +26,13 @@ import comp640.computerbuilder.model.parts.Part;
 public class PartListFragment extends CBFragment {
 
     public void setContent(List<Part> content) {
+
         this.content = content;
+    }
+
+    public void setDummyPartType(PartType type){
+        setContent(DummyParts.getSingleton().getParts(type));
+        _title = type.toString();
     }
 
     public List<Part> content;
@@ -43,7 +48,8 @@ public class PartListFragment extends CBFragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public PartListFragment() {
-
+        _parentID = R.layout.fragment_computer_breakdown;
+        PartFilter.getFilter().resetDefaultValues();
     }
 
     /**
@@ -64,7 +70,8 @@ public class PartListFragment extends CBFragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new PartViewAdapter(content, mListener));
+            recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
+                    , mListener));
         }
         return view;
     }

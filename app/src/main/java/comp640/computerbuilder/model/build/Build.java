@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.model.parts.Part;
+import comp640.computerbuilder.model.parts.PartType;
 
 /**
  * Created by alexanderturner on 4/11/16.
@@ -39,7 +43,7 @@ public class Build {
     /**
      * The list of parts.
      */
-    private List<Part> parts;
+    private Map<String,Part> parts;
 
     /**
      * The list of images.
@@ -72,11 +76,10 @@ public class Build {
         this.budgetMax = budgetMax;
         this.style = style;
         this.stores = stores;
-        this.parts = new ArrayList<>();
+        this.parts = new HashMap<>();
         this.imageURL = "";
         this.price = 0;
 
-        updateDB();
     }
 
     /**
@@ -102,7 +105,7 @@ public class Build {
         return stores;
     }
 
-    public List<Part> getParts(){ return parts;}
+    public Map<String,Part> getParts(){ return parts;}
 
 
     public String getImageURL(){return imageURL;}
@@ -121,23 +124,34 @@ public class Build {
     }
 
     @JsonIgnore
-    public void setPrice(int price){
-        this.price = price;
+    private void updateDB(){
+        DataController.getController().getBuild().updateBuild(this, null);
+    }
+
+    @JsonIgnore
+    public Part getPart(PartType type){
+        if(parts == null)
+            parts = new HashMap<>();
+        return parts.get(type.toString());
+    }
+
+    @JsonIgnore
+    public void setPart(Part part){
+        if(parts == null)
+            parts = new HashMap<>();
+        parts.put(part.getType().toString(), part);
+        setPriceFromParts();
         updateDB();
     }
 
-
+    /**
+     * Sets the price based on the parts
+     */
     @JsonIgnore
-    private void updateDB(){
-        DataController.getController().getBuild().updateBuild(this,null);
+    private void setPriceFromParts(){
+        price = 0;
+        for (int i = 0; i < parts.keySet().size(); i++){
+            price += parts.get(parts.keySet().toArray()[i]).getPrice();
+        }
     }
-
-    /*
-    @Override
-    public String toString() {
-        return "Build{name='" + name + "\', budgetMin='" + budgetMin + "\', budgetMax='" + budgetMax
-                + "\', style='" + style + "\', parts='" + parts + "\', imageURL='" + imageURL +
-                "\', price='" + price + "'}";
-    }
-    */
 }

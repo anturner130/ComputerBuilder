@@ -1,5 +1,6 @@
 package comp640.computerbuilder.logic;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -77,15 +78,6 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
                 break;
         }
 
-
-
-
-
-
-
-
-
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +120,9 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         }
     }
 
+
+
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView _imageView;
         Part _part;
@@ -151,9 +146,11 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         }
 
         protected void onPostExecute(Bitmap result) {
-            Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
-            _part.setImage(image);
-            _imageView.setImageBitmap(image);
+            if(_imageView != null && result != null) {
+                Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
+                _part.setImage(image);
+                _imageView.setImageBitmap(image);
+            }
         }
     }
 }

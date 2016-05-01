@@ -1,9 +1,9 @@
 package comp640.computerbuilder.dummy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
 
@@ -38,7 +38,46 @@ public class DummyParts {
             "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
         dummy.add(new Part(30,"GeForce 770R", BuildStore.Newegg, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
                 "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
+
+public class DummyParts{
+
+    /**
+     * Map containing the parts lists
+     */
+    private  HashMap<PartType,IDummyParts> _partsMap;
+
+    /**
+     * The singleton instance.
+     */
+    private static DummyParts _singleton;
+
+    /**
+     * Private Constructor for singleton
+     */
+    private DummyParts(){
+        _partsMap = new HashMap<>();
+        _partsMap.put(PartType.Audio_Video_Card, new DummyAudioVideoCards());
     }
 
-    public List<Part> getParts() {return dummy;}
+    /**
+     * The singleton accessor
+     * @return the singlton
+     */
+    public static DummyParts getSingleton(){
+        if(_singleton == null)
+            _singleton = new DummyParts();
+        return _singleton;
+    }
+
+    /**
+     * Gets parts based on the type
+     * @param type the type of part
+     * @return the list of dummy parts
+     */
+    public List<Part> getParts(PartType type){
+        if(_partsMap.containsKey(type))
+            return _partsMap.get(type).getParts();
+
+        return new ArrayList<Part>();
+    };
 }

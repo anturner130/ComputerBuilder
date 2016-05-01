@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.dummy.DummyParts;
+import comp640.computerbuilder.model.parts.PartType;
 
 /**
  * Created by deandubois on 4/17/16.
@@ -47,8 +48,11 @@ public class CartFragment extends CBFragment {
         //Create a new part list fragment and insert it into this fragment
         Fragment fragment = new PartListFragment();
         //Set the content of the cart
-        ((PartListFragment)fragment).setContent(new DummyParts().getParts());
+        //((PartListFragment)fragment).setContent(new DummyParts().getParts());
         //Use the child fragment manager to nest fragments
+        ((PartListFragment)fragment).setContent(
+                DummyParts.getSingleton().getParts(PartType.CPU)
+        );
         getChildFragmentManager().beginTransaction().add(R.id.list_cart, fragment).commit();
         getChildFragmentManager().executePendingTransactions();
 

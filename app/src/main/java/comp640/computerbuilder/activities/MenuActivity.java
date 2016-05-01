@@ -1,10 +1,7 @@
 package comp640.computerbuilder.activities;
 
-import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,19 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import comp640.computerbuilder.backend.DataController;
-import comp640.computerbuilder.dummy.DummyContent;
-import comp640.computerbuilder.dummy.DummyParts;
 import comp640.computerbuilder.fragments.AddBuildFragment;
 import comp640.computerbuilder.fragments.CBFragment;
 import comp640.computerbuilder.fragments.CartFragment;
@@ -39,11 +30,13 @@ import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.model.build.Build;
 
+
 import comp640.computerbuilder.model.build.CurrentBuild;
 
 import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
+
 
 
 /*
@@ -65,7 +58,12 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position) {
         Log.v("Pos", "Position" + position);
+        if(_fragment.getClass().equals(PartListFragment.class)){
+            CurrentBuild.getSingleton().getCurrentBuild().setPart(viewHolder.mItem);
+            onRemoveSubfragment(_fragment);
+        }else if(_fragment.getClass().equals(CartFragment.class)){
 
+        }
     }
 
     @Override
@@ -180,6 +178,9 @@ public class MenuActivity extends AppCompatActivity
             case R.id.help:
                 frag = new HelpFragment();
                 break;
+            case R.layout.fragment_computer_breakdown:
+                frag = new ComputerBreakdownFragment();
+                break;
             case R.id.logOut:
                 DataController.getController().getUser().logOut();
                 this.finish();
@@ -200,7 +201,7 @@ public class MenuActivity extends AppCompatActivity
             _toolbar.setTitle(fragment.getTitle());
            if(fragment.getIndex()!= -1)
                 _navigationView.getMenu().getItem(fragment.getIndex()).setChecked(true);
-            else if(_fragment!= null)
+            else if(_fragment!= null && _fragment.getIndex() != -1)
                _navigationView.getMenu().getItem(_fragment.getIndex()).setChecked(false);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.nav_contentframe, fragment).commit();

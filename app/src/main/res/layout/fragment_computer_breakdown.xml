@@ -8,23 +8,80 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Budget Remaining"
-        android:layout_gravity="left"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_weight="7"/>
+        android:layout_weight="13"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="$0"
-        android:id="@+id/budgetTextView"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_weight="7"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height= "wrap_content"
+                android:text="Price"
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$0"
+                android:id="@+id/priceTextView"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="59"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height= "wrap_content"
+                android:text="Budget Remaining"
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$0"
+                android:id="@+id/budgetTextView"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -37,16 +94,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Parts"
+        android:textStyle="bold"
         android:layout_gravity="left"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_weight="10"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"/>
 
-    <ListView
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
-        android:id="@+id/partsListView"
+        android:id="@+id/partsRecyclerView"
         android:layout_gravity="center_horizontal" />
 
     <FrameLayout
