@@ -136,6 +136,13 @@ public class Build {
     }
 
     @JsonIgnore
+    public List<Part> getPartsList(){
+        if(parts == null)
+            parts = new HashMap<>();
+        return new ArrayList<>(parts.values());
+    }
+
+    @JsonIgnore
     public void setPart(Part part){
         if(parts == null)
             parts = new HashMap<>();
