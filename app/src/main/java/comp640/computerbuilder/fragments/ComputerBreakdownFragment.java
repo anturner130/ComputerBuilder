@@ -15,6 +15,7 @@ import android.widget.Toast;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.listeners.OnListFragmentInteractionListener;
 import comp640.computerbuilder.logic.BreakdownViewAdapter;
+import comp640.computerbuilder.logic.PartFilter;
 import comp640.computerbuilder.model.build.CurrentBuild;
 import comp640.computerbuilder.model.parts.PartType;
 

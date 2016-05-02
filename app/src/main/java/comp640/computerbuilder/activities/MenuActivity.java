@@ -2,6 +2,7 @@ package comp640.computerbuilder.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class MenuActivity extends AppCompatActivity
     FrameLayout _contentFrame;
     CBFragment _fragment;
     private HashMap<Integer, OnOptionClickedListener> _optionsMap;
+    private CBFragment _topFragment;
 
     @Override
     public void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position) {
@@ -78,7 +80,7 @@ public class MenuActivity extends AppCompatActivity
         setUpNavDrawer();
 
         //Inflate the fragment
-        inflateFragment(new SavedBuildsListFragment());
+        inflateFragment(new SavedBuildsListFragment(),false);
     }
 
     @Override
@@ -86,9 +88,15 @@ public class MenuActivity extends AppCompatActivity
         super.onCreateOptionsMenu(menu);
         _optionsMap = new HashMap<>();
         int index = 0;
-        for (int option:_fragment.getOptionsMenu().keySet()) {
+        CBFragment fragment;
+        if(_topFragment != null)
+            fragment = _topFragment;
+        else
+            fragment = _fragment;
+
+        for (int option:fragment.getOptionsMenu().keySet()) {
             getMenuInflater().inflate(option, menu);
-            _optionsMap.put(menu.getItem(index).getItemId(), _fragment.getOptionsMenu().get(option));
+            _optionsMap.put(menu.getItem(index).getItemId(), fragment.getOptionsMenu().get(option));
             index++;
         }
         return true;
@@ -96,6 +104,12 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        if(_topFragment != null)
+        {
+            onRemoveTopFragment();
+            return;
+        }
+
         //Change Fragment based on current Fragment
         if(_fragment.getParentID()!= -1)
             selectFragmentFromResource(_fragment.getParentID());
@@ -180,12 +194,12 @@ public class MenuActivity extends AppCompatActivity
             default:
                 break;
         }
-        inflateFragment(frag);
+        inflateFragment(frag, false);
 
     }
 
 
-    private void inflateFragment(CBFragment fragment){
+    private void inflateFragment(CBFragment fragment, boolean add){
         if (fragment!=null) {
             _drawerLayout.closeDrawer(GravityCompat.START);
             if(_fragment != null && fragment.getClass().equals(_fragment.getClass()))
@@ -195,17 +209,31 @@ public class MenuActivity extends AppCompatActivity
                 _navigationView.getMenu().getItem(fragment.getIndex()).setChecked(true);
             else if(_fragment!= null && _fragment.getIndex() != -1)
                _navigationView.getMenu().getItem(_fragment.getIndex()).setChecked(false);
+
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.nav_contentframe, fragment).commit();
+
+            onRemoveTopFragment();
+            if(add){
+                fragmentManager.beginTransaction().
+                        add(R.id.nav_contentframe, fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+                _topFragment = fragment;
+            }else {
+                fragmentManager.beginTransaction().replace(R.id.nav_contentframe, fragment).commit();
+                _fragment = fragment;
+            }
+
+
             invalidateOptionsMenu();
             fragment.setOnSubfragmentListener(this);
-            _fragment = fragment;
+
         }
     }
 
     @Override
     public void onCreateSubfragment(CBFragment fragment) {
-        inflateFragment(fragment);
+        inflateFragment(fragment,false);
     }
 
     @Override
@@ -213,12 +241,29 @@ public class MenuActivity extends AppCompatActivity
         selectFragmentFromResource(fragment.getParentID());
     }
 
+    @Override
+    public void onAddFragmentOnTop(CBFragment fragment) {
+        inflateFragment(fragment,true);
+    }
+
+    @Override
+    public void onRemoveTopFragment() {
+        if(_topFragment!= null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().remove(_topFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .commit();
+            _topFragment = null;
+            setTitle(_fragment.getTitle());
+            invalidateOptionsMenu();
+        }
+    }
 
 
     @Override
     public void onListFragmentInteraction(Build item) {
         CurrentBuild.getSingleton().setCurrentBuild(item);
-        inflateFragment(new ComputerBreakdownFragment());
+        inflateFragment(new ComputerBreakdownFragment(),false);
     }
 
 }

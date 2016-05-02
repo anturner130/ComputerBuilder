@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import comp640.computerbuilder.dummy.DummyParts;
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.logic.PartFilter;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.R;
@@ -24,6 +25,8 @@ import comp640.computerbuilder.model.parts.PartType;
  * interface.
  */
 public class PartListFragment extends CBFragment {
+
+    private RecyclerView recyclerView;
 
     public void setContent(List<Part> content) {
 
@@ -47,7 +50,20 @@ public class PartListFragment extends CBFragment {
      */
     public PartListFragment() {
         _parentID = R.layout.fragment_computer_breakdown;
-        PartFilter.getFilter().resetDefaultValues();
+        addMenuOption(R.menu.filter, new OnOptionClickedListener() {
+            @Override
+            public void onClick() {
+                FilterFragment.parts = content;
+                FilterFragment.listener = new FilterFragment.OnFilterCompleteListener() {
+                    @Override
+                    public void OnFilterComplete() {
+                        recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
+                                , mListener));
+                    }
+                };
+               addFragmentOnTop(new FilterFragment());
+            }
+        });
     }
 
     /**
@@ -66,7 +82,7 @@ public class PartListFragment extends CBFragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
                     , mListener));

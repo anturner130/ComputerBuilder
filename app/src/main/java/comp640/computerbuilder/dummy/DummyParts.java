@@ -28,6 +28,8 @@ public class DummyParts{
     private DummyParts(){
         _partsMap = new HashMap<>();
         _partsMap.put(PartType.Audio_Video_Card, new DummyAudioVideoCards());
+        _partsMap.put(PartType.Memory, new DummyMemory());
+        _partsMap.put(PartType.Motherboard, new DummyMotherboards());
     }
 
     /**
