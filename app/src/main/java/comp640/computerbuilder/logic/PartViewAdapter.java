@@ -1,6 +1,5 @@
 package comp640.computerbuilder.logic;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,24 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.MenuItem;
-import android.view.ContextMenu;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.PartListFragment.OnListFragmentInteractionListener;
 import comp640.computerbuilder.fragments.PartListFragment.OnOnListFragmentLongClickListener;
 
-import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -40,7 +29,8 @@ import java.util.List;
  */
 public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHolder> {
 
-    private final int MAX_STRING_LENGTH = 50;
+    private final int MAX_CONTENT_STRING_LENGTH = 50;
+    private final int MAX_NAME_STRING_LENGTH = 40;
     private final List<Part> mValues;
     private final OnListFragmentInteractionListener mListener;
     private final OnOnListFragmentLongClickListener mLongListener;
@@ -86,13 +76,13 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
                 break;
         }
 
-        if(holder.mContentView.getText().length() > MAX_STRING_LENGTH){
+        if(holder.mContentView.getText().length() > MAX_CONTENT_STRING_LENGTH){
             holder.mContentView.setText(
-                    holder.mContentView.getText().toString().substring(0, MAX_STRING_LENGTH) + "...");
+                    holder.mContentView.getText().toString().substring(0, MAX_CONTENT_STRING_LENGTH) + "...");
         }
-        if(holder.mIdView.getText().length() > MAX_STRING_LENGTH){
+        if(holder.mIdView.getText().length() > MAX_NAME_STRING_LENGTH){
             holder.mIdView.setText(
-                    holder.mIdView.getText().toString().substring(0,MAX_STRING_LENGTH) + "...");
+                    holder.mIdView.getText().toString().substring(0, MAX_NAME_STRING_LENGTH) + "...");
         }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

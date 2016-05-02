@@ -27,7 +27,7 @@ public class DummyMotherboards implements IDummyParts {
                 "M5A97 LE R2.0 supports AMDÆ AM3+ / AM3 multi-core processors with unique L3 cache and delivers better overclocking capabilities with less power consumption. It features dual-channel DDR3 1866 memory support and accelerates data transfer rate up to 5200MTps via HyperTransportô 3.0-based system bus. This motherboard also supports AMDÆ CPUs in the new 32nm manufacturing",
                 "Asus",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813131872"));
+                "http://images17.newegg.com/is/image/newegg/13-131-872-TS?$S640W$"));
         motherboards.add(new Part(61,
                 "A88M-G/3.1 FM2+ / FM2 A88X (Bolton D4) Micro ATX Motherboard",
                 BuildStore.Newegg,
@@ -36,7 +36,7 @@ public class DummyMotherboards implements IDummyParts {
                         "DDR3 2400+(OC) / 2133 / 1866 / 1600 / 1333 / 1066",
                 "ASRock",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813157689"));
+                "http://images10.newegg.com/ProductImage/13-157-689-01.jpg"));
         motherboards.add(new Part(150,
                 "ROG CROSSBLADE RANGER FM2+ AMD A88X (Bolton D4) SATA 6Gb/s USB 3.0 HDMI ATX AMD Gaming Motherboard",
                 BuildStore.Newegg,
@@ -48,7 +48,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Gamer's Guardian - All around protection for the best quality, reliability and durability",
                 "Asus",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813132255"));
+                "http://images17.newegg.com/is/image/newegg/13-132-255-TS?$S640$"));
         motherboards.add(new Part(180,
                 "SABERTOOTH 990FX R2.0 AM3+ AMD 990FX + SB950 SATA 6Gb/s USB 3.0 ATX AMD Motherboard with UEFI BIOS",
                 BuildStore.Newegg,
@@ -61,7 +61,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Windows 8 Ready - Assured Compatibility",
                 "Asus",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813131877"));
+                "http://images17.newegg.com/is/image/newegg/13-131-877-TS?$S640W$"));
         motherboards.add(new Part(70,
                 "970A-G43 Plus AM3+/AM3 AMD 970 & SB950 SATA 6Gb/s USB 3.1 ATX AMD Motherboard",
                 BuildStore.Newegg,
@@ -84,7 +84,7 @@ public class DummyMotherboards implements IDummyParts {
                         "- 6 mounting holes",
                 "MSI",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813130922"));
+                "http://images17.newegg.com/is/image/newegg/13-130-922-TS?$S640$"));
         motherboards.add(new Part(50,
                 "A68HM-GRENADE FM2+ AMD A68H SATA 6Gb/s USB 3.0 HDMI Micro ATX AMD Motherboard",
                 BuildStore.Newegg,
@@ -95,7 +95,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Fast Boot: Quickly Boot Up & Enter OS in A Few Seconds",
                 "MSI",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813130856"));
+                "http://images17.newegg.com/is/image/newegg/13-130-856-TS?$S640W$"));
         motherboards.add(new Part(49,
                 "A68HM-E FM2+ AMD A68H FCH (Bolton D2H) SATA 6Gb/s USB 3.0 Micro ATX AMD Motherboard",
                 BuildStore.Newegg,
@@ -106,14 +106,14 @@ public class DummyMotherboards implements IDummyParts {
                         "- USB 3.0 Boost (UASP Support) - 170% faster transfer speeds than traditional USB 3.0",
                 "Asus",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813132407"));
+                "http://images17.newegg.com/is/image/newegg/13-132-407-TS?$S640W$"));
         motherboards.add(new Part(57,
                 "FM2A78M Pro3+ FM2+ 95W / FM2 100W AMD A78 (Bolton D3) SATA 6Gb/s USB 3.0 HDMI Micro ATX AMD Motherboard",
                 BuildStore.Newegg,
                 "A great foundation for you to build a FM2+/FM2 APU-based system, the ASRock FM2A78M PRO3+ motherboard delivers performance, features, and quality at a great price. It's based on an AMD A78 (Bolton D3) chipset and supports an FM2+ 95W/FM2 100W processor. This motherboard is built to be stable and durable with an all solid capacitor design. Compute with confidence with Full Spike Protection that safeguards sensitive components against voltage abnormalities. Turbocharge the performance with one key with X-Boost technology. Experience blistering data transfer with the native SATA III and USB 3.0 technology. And enjoy clean, noise-minimized sound thanks to the ELNA audio caps. The acclaimed ASRock XFast RAM and XFast LAN are also incorporated, for a fast, smooth experience in both local operation and on the Internet.",
                 "ASRock",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813157570"));
+                "http://images17.newegg.com/is/image/newegg/13-157-570-TS?$S640W$"));
         motherboards.add(new Part(190,
                 "GA-Z97X-UD5H LGA 1150 Intel Z97 HDMI SATA 6Gb/s USB 3.0 ATX Intel Motherboard\n" +
                         "Brand:Gigabyte",
@@ -131,7 +131,7 @@ public class DummyMotherboards implements IDummyParts {
                         "GIGABYTE UEFI DualBIOSô",
                 "Brand:Gigabyte",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=9SIA1N83WB8575"));
+                "http://images10.newegg.com/ProductImage/13-128-707-14.jpg"));
         motherboards.add(new Part(280,
                 "X99 Extreme6 LGA 2011-v3 Intel X99 SATA 6Gb/s USB 3.0 ATX Intel Motherboard",
                 BuildStore.Newegg,
@@ -157,7 +157,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Supports ASRock Cloud, HDD Saver Technology, Full Spike Protection, APP Shop",
                 "ASRock",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813157541"));
+                "http://images10.newegg.com/ProductImage/13-128-707-14.jpg"));
         motherboards.add(new Part(220,
                 "Z97 OC Formula LGA 1150 Intel Z97 HDMI SATA 6Gb/s USB 3.0 ATX Intel Motherboard",
                 BuildStore.Newegg,
@@ -189,14 +189,14 @@ public class DummyMotherboards implements IDummyParts {
                         "-Multi Thermal Sensor",
                 "ASRock",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=N82E16813157502"));
+                "http://images17.newegg.com/is/image/newegg/13-157-502-TS?$S640$"));
         motherboards.add(new Part(1000,
                 "ROG RAMPAGE IV BLACK EDITION LGA 2011 Intel X79 SATA 6Gb/s USB 3.0 Extended ATX Intel Gaming Motherboard",
                 BuildStore.Newegg,
                 "Following in the legacy forged by the Rampage 111 Black Edition, the R4BE - as it is known by ROG fans - is the perfect marriage of gaming and overlocking. Sacrificing nothing to appease both crowds, the Rampage IV Black Edition delivers the ultimate X79 experience.",
                 "Asus",
                 type,
-                "http://www.newegg.com/Product/Product.aspx?Item=9SIA0AJ4287739"));
+                "http://images17.newegg.com/is/image/newegg/13-132-053-TS?$S640$"));
         motherboards.add(new Part(78,
                 "Intel B85 LGA 1150 DDR3 USB 3.1 ATX Motherboard (B85-G41 PC Mate)\n" +
                         "Brand: MSI",
@@ -204,7 +204,7 @@ public class DummyMotherboards implements IDummyParts {
                 "MSI B85-G41 PC MATE LGA1150/ Intel B85/ DDR3/ Crossfire/ SATA3&USB3.0/ A & GBE/ ATX Motherboard",
                 "MSI",
                 type,
-                "http://www.amazon.com/MSI-Intel-Motherboard-B85-G41-PC/dp/B00D12OASW/ref=sr_1_14?ie=UTF8&qid=1462141928&sr=8-14&keywords=motherboard+intel"));
+                "http://ecx.images-amazon.com/images/I/51P7T3gV99L.jpg"));
         motherboards.add(new Part(113,
                 "970 GAMING DDR3 2133 ATX AMD Motherboard",
                 BuildStore.Amazon,
@@ -215,7 +215,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Ports: 4x USB 3.0 Ports (2 rear, 2 via header), 14x USB 2.0 Ports (8 rear, 6 via headers), 1x PS/2 keyboard/Mouse Combo Port, 1x Optical S/PDIF-Out, 1x RJ45 LAN Port, Audio I/O Jacks",
                 "MSI",
                 type,
-                "http://www.amazon.com/MSI-970-GAMING-DDR3-Motherboard/dp/B00LUY72F6/ref=sr_1_1?s=pc&ie=UTF8&qid=1462141889&sr=1-1&keywords=motherboard"));
+                "http://ecx.images-amazon.com/images/I/51XiDG5rPyL.jpg"));
         motherboards.add(new Part(299,
                 "Enthuastic Gaming Intel Z170A LGA 1151 DDR4 USB 3.1 ATX Motherboard (Z170A XPower Gaming Titanium Edition)",
                 BuildStore.Amazon,
@@ -228,7 +228,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Audio: Realtek ALC1150 7.1-Channel High Definition Audio CODEC, Supports S/PDIF Output",
                 "MSI",
                 type,
-                "http://www.amazon.com/MSI-Enthuastic-Z170A-Motherboard-Titanium/dp/B014PXH3CU/ref=sr_1_8?s=pc&ie=UTF8&qid=1462141889&sr=1-8&keywords=motherboard"));
+                "http://ecx.images-amazon.com/images/I/91y1xw2gZ2L._SL1500_.jpg"));
         motherboards.add(new Part(540,
                 "Extreme Gaming Intel X99 LGA 2011 DDR4 USB 3.1 Extended ATX Motherboard (X99A GODlike Gaming )",
                 BuildStore.Amazon,
@@ -242,7 +242,7 @@ public class DummyMotherboards implements IDummyParts {
                         "LAN: 2x Killer E2400 Gigabit Ethernet Controller; Wi-Fi 802.11 a/b/g/n/ac Wireless LAN (2.4/5GHz); Bluetooth v4.0 (Includes BLE and Bluetooth 3.0+HS)",
                 "MSI",
                 type,
-                "http://www.amazon.com/MSI-Extreme-Extended-Motherboard-X99A/dp/B014VITZPM/ref=sr_1_10?s=pc&ie=UTF8&qid=1462141889&sr=1-10&keywords=motherboard"));
+                "http://ecx.images-amazon.com/images/I/91jipBRac0L._SL1500_.jpg"));
         motherboards.add(new Part(399,
                 "ROG MAXIMUS VII FORMULA LGA1150 DDR3 M.2 ACWiFi USB 3.0 Intel Z97 ATX Motherboard",
                 BuildStore.Amazon,
@@ -253,7 +253,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Luxuriate in the smart design, premium components, durable materials and tough double-sided armor",
                 "Asus",
                 type,
-                "http://www.amazon.com/MAXIMUS-VII-FORMULA-LGA1150-Motherboard/dp/B00M5DUVT0/ref=sr_1_24?s=pc&ie=UTF8&qid=1462141889&sr=1-24&keywords=motherboard"));
+                "http://ecx.images-amazon.com/images/I/91-sjw0lh4L._SL1500_.jpg"));
         motherboards.add(new Part(105,
                 "Intel Desktop Board Media Series ATX Form Factor for Second Generation Intel Core Family Processors BOXDH67CLB3",
                 BuildStore.Amazon,
@@ -266,7 +266,7 @@ public class DummyMotherboards implements IDummyParts {
                         "Supports Intel Rapid Storage Technology, including RAID 0, 1, 5, 10 with Intel Rapid Recover Technology",
                 "Intel",
                 type,
-                "http://www.amazon.com/Intel-Desktop-Generation-Processors-BOXDH67CLB3/dp/B004Q7GOM6/ref=sr_1_4?ie=UTF8&qid=1462141928&sr=8-4&keywords=motherboard+intel"));
+                "http://ecx.images-amazon.com/images/I/51O2eVyTX-L.jpg"));
         motherboards.add(new Part(55,
                 "AM3+ AMD DDR3 1333 760G HDMI USB 3.0 Micro ATX Motherboard GA-78LMT-USB3",
                 BuildStore.Amazon,
@@ -280,7 +280,7 @@ public class DummyMotherboards implements IDummyParts {
                         "LAN: 1 x Realtek GbE LAN chip (10/100/1000 Mbit)",
                 "Gigabyte",
                 type,
-                "http://www.amazon.com/Gigabyte-DDR3-Micro-Motherboard-GA-78LMT-USB3/dp/B009FC3YJ8/ref=sr_1_2?s=pc&ie=UTF8&qid=1462142395&sr=1-2&keywords=amd+motherboard"));
+                "http://ecx.images-amazon.com/images/I/81kZsTGlG9L._SL1500_.jpg"));
         motherboards.add(new Part(51,
                 "FM2+ AMD A78 HDMI Dual-Link DVI D-Sub UEFI BIOS mATX DDR3 2133 Motherboard GA-F2A78M-HD2",
                 BuildStore.Amazon,
