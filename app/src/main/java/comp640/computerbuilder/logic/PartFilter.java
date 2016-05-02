@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 
 /**
@@ -18,6 +19,7 @@ public class PartFilter {
     private int minPrice;
     private int maxPrice;
     private String brand;
+    private BuildStore store;
     private SortType sortType;
 
     /**
@@ -48,6 +50,7 @@ public class PartFilter {
         maxPrice = -1;
         brand = null;
         sortType = SortType.No_Sort;
+        store = BuildStore.Multiple_Stores;
     }
 
     /**
@@ -62,9 +65,28 @@ public class PartFilter {
     public void setBrand(String brand){
         this.brand = brand;
     }
+    public void setStore(BuildStore store) {this.store = store;}
     public void setSortType(SortType type)
     {
         sortType = type;
+    }
+
+    /**
+     * Getters
+     */
+    public int getMinPrice(){
+        return minPrice;
+    };
+    public int getMaxPrice(){
+        return maxPrice;
+    }
+    public String getBrand(){
+        return brand;
+    }
+    public BuildStore getStore() {return store;}
+    public SortType getSortType()
+    {
+        return sortType;
     }
 
     /**
@@ -82,7 +104,7 @@ public class PartFilter {
             }
         }
 
-        if(brand != null){
+        if(brand != null && !brand.equals("None")){
             if(newPartList.isEmpty()){
                 for (Part part:partsToFilter) {
                     if(part.getBrand().equals(brand))
@@ -137,6 +159,24 @@ public class PartFilter {
                         });
                     }
                     break;
+            }
+        }
+
+        if (store != BuildStore.Multiple_Stores){
+            if(newPartList.isEmpty()){
+                for (Part part:partsToFilter) {
+                    if(part.getStore().equals(store))
+                        newPartList.add(part);
+                }
+            } else {
+                List<Part> partsToRemove = new ArrayList<>();
+                for (Part part:newPartList) {
+                    if(!part.getStore().equals(store))
+                        partsToRemove.add(part);
+                }
+                for (Part part:partsToRemove) {
+                    newPartList.remove(part);
+                }
             }
         }
 
