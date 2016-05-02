@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+<<<<<<< HEAD
+
+import android.widget.EditText;
+=======
+>>>>>>> master
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,13 +29,20 @@ import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
 
+
+
 /**
  * Created by deandubois on 4/17/16.
  */
 public class CartFragment extends CBFragment {
 
+<<<<<<< HEAD
+    private Button _checkOutButton;
+
+=======
     private Button _checkOut;
     private TextView _totalText;
+>>>>>>> master
 
     public CartFragment(){
         _title = "My Cart";
@@ -80,7 +92,20 @@ public class CartFragment extends CBFragment {
         getChildFragmentManager().executePendingTransactions();
         updateTotal();
 
+
+       _checkOutButton=(Button)rootView.findViewById(R.id.checkOutButton);
+
+        _checkOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View rootView) {
+               createSubfragment(new PaymentInfoFragment());
+          }
+        });
+
+
         return rootView;
+
+
     }
 
 

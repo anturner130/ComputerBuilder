@@ -34,6 +34,7 @@ public class CBFragment extends Fragment {
         _options = new HashMap<>();
     }
 
+
     public void setOnSubfragmentListener(OnSubfragmentListener listener){
         _listener = listener;
     }
