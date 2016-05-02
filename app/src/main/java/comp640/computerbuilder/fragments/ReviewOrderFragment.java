@@ -15,8 +15,12 @@ import comp640.computerbuilder.dummy.DummyParts;
  * Created by deandubois on 4/26/16.
  */
 public class ReviewOrderFragment extends CBFragment {
-    public void ReviewOrderFragment()
+
+
+    public ReviewOrderFragment()
     {
+        _title = "Review Order";
+        _parentID = R.id.myCart;
 
     }
 

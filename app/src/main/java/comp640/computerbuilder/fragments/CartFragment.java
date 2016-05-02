@@ -12,11 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Locale;
 
 import comp640.computerbuilder.R;
+import comp640.computerbuilder.activities.MenuActivity;
+import comp640.computerbuilder.dummy.DummyCart;
 import comp640.computerbuilder.dummy.DummyParts;
+import comp640.computerbuilder.model.build.BuildStore;
+import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
 
 /**
@@ -24,11 +29,24 @@ import comp640.computerbuilder.model.parts.PartType;
  */
 public class CartFragment extends CBFragment {
 
-    Button _checkOut;
+    private Button _checkOut;
+    private TextView _totalText;
 
     public CartFragment(){
         _title = "My Cart";
         _index = 3;
+
+    }
+
+    public void updateTotal()
+    {
+        int total = 0;
+        for(Part p: DummyCart.getSingleton().getParts())
+        {
+            total+=p.getPrice();
+
+        }
+        _totalText.setText("Total: $" + total);
     }
 
 
@@ -37,11 +55,13 @@ public class CartFragment extends CBFragment {
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
 
         //Link the checkout button and set it's on click listener
-        _checkOut = (Button) container.findViewById(R.id.button_checkout);
+        _totalText = (TextView) rootView.findViewById(R.id.cart_total);
+        _checkOut = (Button) rootView.findViewById(R.id.button_checkout);
         _checkOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Send to the review order fargment which has yet to be implemented
+                createSubfragment(new ReviewOrderFragment());
             }
         });
 
@@ -50,11 +70,15 @@ public class CartFragment extends CBFragment {
         //Set the content of the cart
         //((PartListFragment)fragment).setContent(new DummyParts().getParts());
         //Use the child fragment manager to nest fragments
-        ((PartListFragment)fragment).setContent(
-                DummyParts.getSingleton().getParts(PartType.CPU)
-        );
+        //DummyParts.getSingleton().getParts(PartType.Audio_Video_Card).add(new Part(456, "GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
+         //       "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
+         //       ((PartListFragment) fragment).setContent(
+        //        DummyParts.getSingleton().getParts(PartType.Audio_Video_Card)
+       // );
+        ((PartListFragment)fragment).setContent(DummyCart.getSingleton().getParts());
         getChildFragmentManager().beginTransaction().add(R.id.list_cart, fragment).commit();
         getChildFragmentManager().executePendingTransactions();
+        updateTotal();
 
         return rootView;
     }

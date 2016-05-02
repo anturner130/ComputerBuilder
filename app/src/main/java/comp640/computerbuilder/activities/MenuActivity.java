@@ -8,14 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
 import comp640.computerbuilder.backend.DataController;
+import comp640.computerbuilder.dummy.DummyCart;
 import comp640.computerbuilder.fragments.AddBuildFragment;
 import comp640.computerbuilder.fragments.CBFragment;
 import comp640.computerbuilder.fragments.CartFragment;
@@ -23,6 +27,7 @@ import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.ComputerBreakdownFragment;
 import comp640.computerbuilder.fragments.HelpFragment;
 import comp640.computerbuilder.fragments.PartListFragment;
+import comp640.computerbuilder.fragments.ProfileFragment;
 import comp640.computerbuilder.fragments.SavedBuildsListFragment;
 import comp640.computerbuilder.fragments.SettingsFragment;
 import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
@@ -46,7 +51,7 @@ import comp640.computerbuilder.model.parts.PartType;
 public class MenuActivity extends AppCompatActivity
         implements PartListFragment.OnListFragmentInteractionListener,
         SavedBuildsListFragment.OnListFragmentInteractionListener,
-        OnSubfragmentListener{
+        OnSubfragmentListener, PartListFragment.OnOnListFragmentLongClickListener{
 
     private Toolbar _toolbar;
     private DrawerLayout _drawerLayout;
@@ -56,13 +61,35 @@ public class MenuActivity extends AppCompatActivity
     private HashMap<Integer, OnOptionClickedListener> _optionsMap;
 
     @Override
+    public void onListFragmentLongClick(final PartViewAdapter.ViewHolder viewHolder, final int position) {
+        Log.v("Pos", "Position" + position +" location: Cart long");
+        if(_fragment.getClass().equals(CartFragment.class)) {
+            PopupMenu popup = new PopupMenu(viewHolder.mView.getContext(), viewHolder.mIdView);
+            popup.inflate(R.menu.cart_delete);
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    Log.v("Menu", "Popup: " + position);
+                    DummyCart.getSingleton().getParts().remove(position);
+                    viewHolder.removeItem();
+                    ((CartFragment)_fragment).updateTotal();
+                    return false;
+                }
+            });
+            popup.show();
+        }
+    }
+
+    @Override
     public void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position) {
         Log.v("Pos", "Position" + position);
         if(_fragment.getClass().equals(PartListFragment.class)){
             CurrentBuild.getSingleton().getCurrentBuild().setPart(viewHolder.mItem);
+            DummyCart.getSingleton().getParts().add(viewHolder.mItem);
+            Log.v("Pos", "Position" + position);
             onRemoveSubfragment(_fragment);
         }else if(_fragment.getClass().equals(CartFragment.class)){
-
+            Log.v("Pos", "Position" + position +" location: Cart");
         }
     }
 
@@ -161,7 +188,7 @@ public class MenuActivity extends AppCompatActivity
         CBFragment frag = null;
         switch (id) {
             case R.id.myProfile:
-               // frag = new PartListFragment();
+                frag = new ProfileFragment();
                 break;
             case R.id.newBuild:
                 frag = new AddBuildFragment();
@@ -228,5 +255,7 @@ public class MenuActivity extends AppCompatActivity
         CurrentBuild.getSingleton().setCurrentBuild(item);
         inflateFragment(new ComputerBreakdownFragment());
     }
+
+
 
 }

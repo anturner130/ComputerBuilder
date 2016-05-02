@@ -6,40 +6,14 @@ import java.util.List;
 
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
-
+import comp640.computerbuilder.model.build.BuildStore;
 /**
  * Created by deandubois on 4/24/16.
  */
 public class DummyParts {
     List<Part> dummy = new ArrayList<>();
-    public DummyParts()
-    {
-        dummy.add(new Part(456,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(345,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
-        dummy.add(new Part(56,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(6765,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
-        dummy.add(new Part(567,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-            "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
-        dummy.add(new Part(167,"GeForce 770R", BuildStore.Newegg, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-            "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
-        dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-            "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(24,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM and a great ability to handle all games and programs", "GeForce", PartType.Audio_Video_Card,
-                "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
-        dummy.add(new Part(170,"GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-            "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-        dummy.add(new Part(30,"GeForce 770R", BuildStore.Newegg, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-                "http://smartcomp-pa.com/catalog/images/EVGA%20210.jpg"));
 
-public class DummyParts{
+
 
     /**
      * Map containing the parts lists
@@ -57,6 +31,12 @@ public class DummyParts{
     private DummyParts(){
         _partsMap = new HashMap<>();
         _partsMap.put(PartType.Audio_Video_Card, new DummyAudioVideoCards());
+        _partsMap.put(PartType.Case, new DummyCase());
+        _partsMap.put(PartType.Cooling, new DummyCooling());
+        _partsMap.put(PartType.CPU, new DummyCPU());
+        _partsMap.put(PartType.Memory, new DummyMemory());
+        _partsMap.put(PartType.Motherboard, new DummyMotherBoard());
+        _partsMap.put(PartType.Operating_System, new DummyOperatingSystem());
     }
 
     /**
