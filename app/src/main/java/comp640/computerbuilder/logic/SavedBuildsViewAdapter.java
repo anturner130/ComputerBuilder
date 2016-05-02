@@ -35,6 +35,8 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
         _listener = listener;
     }
 
+
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

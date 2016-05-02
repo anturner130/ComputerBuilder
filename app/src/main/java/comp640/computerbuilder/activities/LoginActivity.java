@@ -21,7 +21,12 @@ import java.util.prefs.Preferences;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
+<<<<<<< HEAD
 import comp640.computerbuilder.fragments.ComputerBreakdownFragment;
+=======
+import comp640.computerbuilder.logic.SettingsReference;
+import comp640.computerbuilder.model.build.SavedBuilds;
+>>>>>>> master
 
 /**
  * Created by alexanderturner on 4/10/16.
@@ -190,7 +195,9 @@ public class LoginActivity extends AppCompatActivity {
      * Called upon success of logging in or registering
      */
     private void loginOrRegisterSuccess(){
-        Toast.makeText(getApplicationContext(),"Success", Toast.LENGTH_LONG).show();
+        SavedBuilds.getSingleton().init();
+        SettingsReference.getReference().init();
+        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
         switchToBuildsActivity();
     }
 

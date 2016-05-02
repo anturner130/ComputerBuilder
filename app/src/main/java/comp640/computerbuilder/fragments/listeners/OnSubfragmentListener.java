@@ -9,4 +9,6 @@ import comp640.computerbuilder.fragments.CBFragment;
 public interface OnSubfragmentListener {
     void onCreateSubfragment(CBFragment fragment);
     void onRemoveSubfragment(CBFragment fragment);
+    void onAddFragmentOnTop(CBFragment fragment);
+    void onRemoveTopFragment();
 }

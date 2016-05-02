@@ -10,24 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.PartListFragment.OnListFragmentInteractionListener;
+import comp640.computerbuilder.fragments.PartListFragment.OnOnListFragmentLongClickListener;
+
 import comp640.computerbuilder.model.parts.Part;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+
  * TODO: Replace the implementation with code for your data type.
  * TODO: Research custom list adapter and implement it to work with part.
  * TODO: Make generic enough to handle different kinds of parts
@@ -35,12 +29,16 @@ import java.util.List;
  */
 public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHolder> {
 
+    private final int MAX_CONTENT_STRING_LENGTH = 50;
+    private final int MAX_NAME_STRING_LENGTH = 40;
     private final List<Part> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private final OnOnListFragmentLongClickListener mLongListener;
 
-    public PartViewAdapter(List<Part> items, OnListFragmentInteractionListener listener) {
+    public PartViewAdapter(List<Part> items, OnListFragmentInteractionListener listener, OnOnListFragmentLongClickListener longListener) {
         mValues = items;
         mListener = listener;
+        mLongListener = longListener;
     }
 
     @Override
@@ -50,8 +48,10 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getName());
         holder.mContentView.setText(mValues.get(position).getDescription());
@@ -63,15 +63,27 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         }else{
             holder.mImageView.setImageBitmap(holder.mItem.getImage());
         }
+        switch (holder.mItem.getStore())
+        {
+            case Amazon:
+                holder.mStoreView.setImageResource(R.mipmap.ic_amazon);
+                break;
+            case Newegg:
+                holder.mStoreView.setImageResource(R.mipmap.ic_newegg);
+                break;
+            case Multiple_Stores:
 
+                break;
+        }
 
-
-
-
-
-
-
-
+        if(holder.mContentView.getText().length() > MAX_CONTENT_STRING_LENGTH){
+            holder.mContentView.setText(
+                    holder.mContentView.getText().toString().substring(0, MAX_CONTENT_STRING_LENGTH) + "...");
+        }
+        if(holder.mIdView.getText().length() > MAX_NAME_STRING_LENGTH){
+            holder.mIdView.setText(
+                    holder.mIdView.getText().toString().substring(0, MAX_NAME_STRING_LENGTH) + "...");
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +95,17 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
                 }
             }
         });
+
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(null != mLongListener) {
+                    mLongListener.onListFragmentLongClick(holder, position);
+                }
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -96,6 +119,7 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         public final TextView mContentView;
         public final ImageView mImageView;
         public final TextView mPriceView;
+        public final ImageView mStoreView;
         public Part mItem;
 
         public ViewHolder(View view) {
@@ -105,13 +129,23 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
             mContentView = (TextView) view.findViewById(R.id.content);
             mImageView = (ImageView) view.findViewById(R.id.imageView);
             mPriceView = (TextView) view.findViewById(R.id.part_price);
+            mStoreView = (ImageView) view.findViewById(R.id.ic_store);
+
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public void removeItem()
+        {
+            notifyDataSetChanged();
         }
+
+
+
+
+
     }
+
+
+
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView _imageView;
@@ -136,9 +170,11 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         }
 
         protected void onPostExecute(Bitmap result) {
-            Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
-            _part.setImage(image);
-            _imageView.setImageBitmap(image);
+            if(_imageView != null && result != null) {
+                Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
+                _part.setImage(image);
+                _imageView.setImageBitmap(image);
+            }
         }
     }
 }

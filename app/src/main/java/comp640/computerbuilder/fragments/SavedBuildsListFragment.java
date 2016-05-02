@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
+import comp640.computerbuilder.logic.PartFilter;
 import comp640.computerbuilder.logic.SavedBuildsViewAdapter;
 import comp640.computerbuilder.model.build.Build;
 import comp640.computerbuilder.model.build.OnBuildsChangedListener;
@@ -38,6 +39,7 @@ public class SavedBuildsListFragment extends CBFragment implements OnBuildsChang
                 createSubfragment(new AddBuildFragment());
             }
         });
+        PartFilter.getFilter().resetDefaultValues();
     }
 
 

@@ -47,6 +47,14 @@ public class CBFragment extends Fragment {
         _listener.onRemoveSubfragment(fragment);
     }
 
+    protected void addFragmentOnTop(CBFragment fragment){
+        _listener.onAddFragmentOnTop(fragment);
+    }
+
+    protected void removeTopFragment(){
+        _listener.onRemoveTopFragment();
+    }
+
     public void addMenuOption(Integer resourceId, OnOptionClickedListener listener){
         _options.put(resourceId, listener);
     }

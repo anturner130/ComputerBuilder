@@ -2,40 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AddBuildFragment">
-
+    tools:context="comp640.computerbuilder.fragments.PartFilters"
+    android:clickable="true"
+    android:background="#80000000"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFFFF">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Build Name"
-            android:textStyle="bold"
-            android:id="@+id/textView2" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buildName"
-            android:layout_gravity="center_horizontal"
-            android:singleLine="true" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimary"></FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Budget"
+            android:text="Select Price Range:"
             android:textStyle="bold"
             android:id="@+id/textView3" />
 
@@ -49,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Minimum Budget:        "
+                android:text="Minimum Price:        "
                 android:id="@+id/textView4" />
 
             <TextView
@@ -57,14 +40,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="$ 0"
-                android:id="@+id/minBudget" />
+                android:id="@+id/minPrice" />
         </LinearLayout>
 
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
-            android:id="@+id/minBudgetBar"
+            android:id="@+id/minPriceBar"
             android:indeterminate="false"
             android:thumbTint="@color/colorPrimary"/>
 
@@ -77,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Maximum Budget:       "
+                android:text="Maximum Price:       "
                 android:id="@+id/textView5" />
 
             <TextView
@@ -85,14 +68,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="$ 0"
-                android:id="@+id/maxBudget" />
+                android:id="@+id/maxPrice" />
         </LinearLayout>
 
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
-            android:id="@+id/maxBudgetBar"
+            android:id="@+id/maxPriceBar"
             android:indeterminate="false"
             android:thumbTint="@color/colorPrimary"
             />
@@ -107,15 +90,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Stores"
+            android:text="Sort By"
             android:textStyle="bold"
             android:id="@+id/textView6" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/storesSpinner"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/sortSpinner"
+            android:layout_gravity="center_horizontal">
+        </Spinner>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -127,14 +111,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Styles"
+            android:text="Brand"
             android:textStyle="bold"
-            android:id="@+id/textView7" />
+            android:id="@+id/textView7"
+            />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/stylesSpinner"
+            android:id="@+id/brandSpinner"
             android:layout_gravity="center_horizontal" />
 
         <FrameLayout
@@ -142,19 +127,28 @@
             android:layout_height="2dp"
             android:background="@color/colorPrimary"
             android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Retailer"
+            android:textStyle="bold"
+            android:id="@+id/textView8" />
 
-        <Button
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Building"
-            android:id="@+id/submitButton"
-            android:textColor="@color/colorButtonText"
-            android:background="@color/colorPrimary"
+            android:id="@+id/retailerSpinner"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"/>
+            />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center_horizontal" />
+
 
 
     </LinearLayout>
+
 </FrameLayout>
