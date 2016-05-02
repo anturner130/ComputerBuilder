@@ -61,7 +61,7 @@ public class BreakdownViewAdapter extends RecyclerView.Adapter<BreakdownViewAdap
                 holder._view.setBackgroundColor(Color.parseColor("#E5FFE5"));
                 List<Part> parts = new ArrayList<>();
                 parts.add(part);
-                PartViewAdapter adapter = new PartViewAdapter(parts,null);
+                PartViewAdapter adapter = new PartViewAdapter(parts,null, null);
                 PartViewAdapter.ViewHolder viewHolder = adapter.onCreateViewHolder(
                         (ViewGroup) holder._view, 0);
                 adapter.onBindViewHolder(viewHolder,0);
@@ -103,6 +103,15 @@ public class BreakdownViewAdapter extends RecyclerView.Adapter<BreakdownViewAdap
         });
     }
 
+    /*
+        By removing all of the views the part views wont be duplicated
+        this fixed the bug
+     */
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        holder._partView.removeAllViews();
+        super.onViewRecycled(holder);
+    }
 
     @Override
     public int getItemCount() {
@@ -120,7 +129,6 @@ public class BreakdownViewAdapter extends RecyclerView.Adapter<BreakdownViewAdap
             _view = view;
             _titleView = (TextView) view.findViewById(R.id.title);
             _partView = (LinearLayout)view.findViewById(R.id.partView);
-
         }
 
         @Override

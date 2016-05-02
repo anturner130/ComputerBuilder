@@ -39,10 +39,13 @@ public class PartListFragment extends CBFragment {
     }
 
     public List<Part> content;
+
+
     /**
      * The fragment interaction listener.
      */
     private OnListFragmentInteractionListener mListener;
+    private OnOnListFragmentLongClickListener mLongListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,7 +61,7 @@ public class PartListFragment extends CBFragment {
                     @Override
                     public void OnFilterComplete() {
                         recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
-                                , mListener));
+                                , mListener, mLongListener));
                     }
                 };
                addFragmentOnTop(new FilterFragment());
@@ -85,7 +88,7 @@ public class PartListFragment extends CBFragment {
             recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
-                    , mListener));
+                    , mListener, mLongListener));
         }
         return view;
     }
@@ -96,6 +99,7 @@ public class PartListFragment extends CBFragment {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
+            mLongListener = (OnOnListFragmentLongClickListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -122,5 +126,9 @@ public class PartListFragment extends CBFragment {
         // TODO: Update argument type and name
 
         void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position);
+    }
+
+    public interface OnOnListFragmentLongClickListener {
+        void onListFragmentLongClick(PartViewAdapter.ViewHolder viewHolder, int position);
     }
 }

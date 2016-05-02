@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuItem;
+import android.view.ContextMenu;
 
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.PartListFragment.OnListFragmentInteractionListener;
+import comp640.computerbuilder.fragments.PartListFragment.OnOnListFragmentLongClickListener;
+
+import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 
 import java.io.BufferedInputStream;
@@ -38,10 +43,12 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
     private final int MAX_STRING_LENGTH = 50;
     private final List<Part> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private final OnOnListFragmentLongClickListener mLongListener;
 
-    public PartViewAdapter(List<Part> items, OnListFragmentInteractionListener listener) {
+    public PartViewAdapter(List<Part> items, OnListFragmentInteractionListener listener, OnOnListFragmentLongClickListener longListener) {
         mValues = items;
         mListener = listener;
+        mLongListener = longListener;
     }
 
     @Override
@@ -51,8 +58,10 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getName());
         holder.mContentView.setText(mValues.get(position).getDescription());
@@ -63,6 +72,18 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
                     .execute(url);
         }else{
             holder.mImageView.setImageBitmap(holder.mItem.getImage());
+        }
+        switch (holder.mItem.getStore())
+        {
+            case Amazon:
+                holder.mStoreView.setImageResource(R.mipmap.ic_amazon);
+                break;
+            case Newegg:
+                holder.mStoreView.setImageResource(R.mipmap.ic_newegg);
+                break;
+            case Multiple_Stores:
+
+                break;
         }
 
         if(holder.mContentView.getText().length() > MAX_STRING_LENGTH){
@@ -84,6 +105,17 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
                 }
             }
         });
+
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(null != mLongListener) {
+                    mLongListener.onListFragmentLongClick(holder, position);
+                }
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -97,6 +129,7 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
         public final TextView mContentView;
         public final ImageView mImageView;
         public final TextView mPriceView;
+        public final ImageView mStoreView;
         public Part mItem;
 
         public ViewHolder(View view) {
@@ -106,12 +139,19 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
             mContentView = (TextView) view.findViewById(R.id.content);
             mImageView = (ImageView) view.findViewById(R.id.imageView);
             mPriceView = (TextView) view.findViewById(R.id.part_price);
+            mStoreView = (ImageView) view.findViewById(R.id.ic_store);
+
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public void removeItem()
+        {
+            notifyDataSetChanged();
         }
+
+
+
+
+
     }
 
 

@@ -6,11 +6,14 @@ import java.util.List;
 
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
-
+import comp640.computerbuilder.model.build.BuildStore;
 /**
  * Created by deandubois on 4/24/16.
  */
-public class DummyParts{
+public class DummyParts {
+    List<Part> dummy = new ArrayList<>();
+
+
 
     /**
      * Map containing the parts lists
@@ -28,6 +31,10 @@ public class DummyParts{
     private DummyParts(){
         _partsMap = new HashMap<>();
         _partsMap.put(PartType.Audio_Video_Card, new DummyAudioVideoCards());
+        _partsMap.put(PartType.Case, new DummyCase());
+        _partsMap.put(PartType.Cooling, new DummyCooling());
+        _partsMap.put(PartType.CPU, new DummyCPU());
+        _partsMap.put(PartType.Operating_System, new DummyOperatingSystem());
         _partsMap.put(PartType.Memory, new DummyMemory());
         _partsMap.put(PartType.Motherboard, new DummyMotherboards());
     }

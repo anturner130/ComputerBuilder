@@ -13,9 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import comp640.computerbuilder.R;
+import comp640.computerbuilder.dummy.DummyCart;
 import comp640.computerbuilder.fragments.listeners.OnListFragmentInteractionListener;
 import comp640.computerbuilder.logic.BreakdownViewAdapter;
-import comp640.computerbuilder.logic.PartFilter;
+
 import comp640.computerbuilder.model.build.CurrentBuild;
 import comp640.computerbuilder.model.parts.PartType;
 
@@ -105,7 +106,10 @@ public class ComputerBreakdownFragment extends CBFragment implements View.OnClic
     }
 
     private void tryFinishBuild(){
+
         Toast.makeText(getContext(),"Test submit", Toast.LENGTH_LONG).show();
+        DummyCart.getSingleton().add(CurrentBuild.getSingleton().getCurrentBuild().getParts());
+        createSubfragment(new CartFragment());
     }
 
     @Override
