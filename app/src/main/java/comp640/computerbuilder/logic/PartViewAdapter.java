@@ -32,8 +32,7 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+
  * TODO: Replace the implementation with code for your data type.
  * TODO: Research custom list adapter and implement it to work with part.
  * TODO: Make generic enough to handle different kinds of parts
@@ -41,6 +40,7 @@ import java.util.List;
  */
 public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHolder> {
 
+    private final int MAX_STRING_LENGTH = 50;
     private final List<Part> mValues;
     private final OnListFragmentInteractionListener mListener;
     private final OnOnListFragmentLongClickListener mLongListener;
@@ -84,6 +84,15 @@ public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHo
             case Multiple_Stores:
 
                 break;
+        }
+
+        if(holder.mContentView.getText().length() > MAX_STRING_LENGTH){
+            holder.mContentView.setText(
+                    holder.mContentView.getText().toString().substring(0, MAX_STRING_LENGTH) + "...");
+        }
+        if(holder.mIdView.getText().length() > MAX_STRING_LENGTH){
+            holder.mIdView.setText(
+                    holder.mIdView.getText().toString().substring(0,MAX_STRING_LENGTH) + "...");
         }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
