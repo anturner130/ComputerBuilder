@@ -4,7 +4,7 @@
         <item
             android:id="@+id/myProfile"
             android:checked="true"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@mipmap/ic_profile"
             android:title="@string/profile" />
         <item
             android:id="@+id/newBuild"
@@ -12,19 +12,19 @@
             android:title="@string/new_build" />
         <item
             android:id="@+id/savedBuild"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@mipmap/ic_save"
             android:title="@string/saved_builds" />
         <item
             android:id="@+id/myCart"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@mipmap/ic_cart"
             android:title="@string/cart" />
         <item
             android:id="@+id/settings"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@mipmap/ic_cart"
             android:title="@string/settings" />
         <item
             android:id="@+id/help"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@mipmap/ic_help"
             android:title="@string/help" />
         <item
             android:id="@+id/logOut"

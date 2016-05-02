@@ -51,9 +51,14 @@ public class Build {
     private String imageURL;
 
     /**
-     * The total price;
+     * The total price.
      */
     private int price;
+
+    /**
+     * Whether or not the build has been purchased or not.
+     */
+    private boolean purchased;
 
     private Build(){}
 

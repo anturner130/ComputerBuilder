@@ -46,7 +46,7 @@ public class FilterFragment extends CBFragment implements SeekBar.OnSeekBarChang
     public FilterFragment()
     {
         _title = "Parts Filter";
-        addMenuOption(R.menu.filter, new OnOptionClickedListener() {
+        addMenuOption(R.menu.filter_selected, new OnOptionClickedListener() {
             @Override
             public void onClick() {
                 removeTopFragment();

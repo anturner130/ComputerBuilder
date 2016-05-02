@@ -52,7 +52,8 @@ import comp640.computerbuilder.model.parts.PartType;
 public class MenuActivity extends AppCompatActivity
         implements PartListFragment.OnListFragmentInteractionListener,
         SavedBuildsListFragment.OnListFragmentInteractionListener,
-        OnSubfragmentListener, PartListFragment.OnOnListFragmentLongClickListener{
+        OnSubfragmentListener,
+        PartListFragment.OnOnListFragmentLongClickListener{
 
     private Toolbar _toolbar;
     private DrawerLayout _drawerLayout;
@@ -87,7 +88,6 @@ public class MenuActivity extends AppCompatActivity
         Log.v("Pos", "Position" + position);
         if(_fragment.getClass().equals(PartListFragment.class)){
             CurrentBuild.getSingleton().getCurrentBuild().setPart(viewHolder.mItem);
-            DummyCart.getSingleton().getParts().add(viewHolder.mItem);
             Log.v("Pos", "Position" + position);
             onRemoveSubfragment(_fragment);
         }else if(_fragment.getClass().equals(CartFragment.class)){

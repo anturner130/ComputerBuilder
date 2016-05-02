@@ -110,6 +110,7 @@ public class BreakdownViewAdapter extends RecyclerView.Adapter<BreakdownViewAdap
     @Override
     public void onViewRecycled(ViewHolder holder) {
         holder._partView.removeAllViews();
+        holder._view.setBackgroundColor(Color.parseColor("#FFFFFF"));
         super.onViewRecycled(holder);
     }
 
