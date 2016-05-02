@@ -21,6 +21,7 @@ import java.util.prefs.Preferences;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
+import comp640.computerbuilder.fragments.ComputerBreakdownFragment;
 
 /**
  * Created by alexanderturner on 4/10/16.
@@ -105,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * Sets the on click listeners of the buttons.
      */
@@ -112,9 +114,10 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin(_emailEditText.getText().toString(),
-                        _passwordEditText.getText().toString(),
-                        _rememberMeButton.isChecked());
+                
+                //attemptLogin(_emailEditText.getText().toString(),
+                      //  _passwordEditText.getText().toString(),
+                      //  _rememberMeButton.isChecked());
             }
         });
 

@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Billing Address"
-            android:id="@+id/textView8"
+            android:id="@+id/billingAddress1"
             android:layout_gravity="center_horizontal" />
 
         <EditText
@@ -23,20 +23,20 @@
             android:inputType="textPersonName"
             android:text="Name"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/textPersonName1" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/textPostalAddress1"
             android:text="Address" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText3"
+            android:id="@+id/textCityStateZip"
             android:text="City, State, Zip" />
     </LinearLayout>
 
@@ -62,13 +62,13 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"
+            android:id="@+id/textCreditCard"
             android:text="Credit Card Number" />
 
         <EditText
             android:layout_width="62dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editText5"
+            android:id="@+id/textCVC"
             android:text="CVC" />
 
         <TextView
@@ -76,14 +76,14 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Expiration Date"
-            android:id="@+id/textView10"
+            android:id="@+id/textExpirationDate"
             android:enabled="false"
             android:textColor="#040404" />
 
         <DatePicker
             android:layout_width="wrap_content"
             android:layout_height="120dp"
-            android:id="@+id/datePicker"
+            android:id="@+id/datePickerExpiration"
             android:calendarTextColor="#331818" />
 
     </LinearLayout>

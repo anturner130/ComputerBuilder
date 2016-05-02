@@ -8,6 +8,8 @@ import java.util.List;
 import android.view.MenuItem;
 
 import java.util.HashMap;
+
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
 import comp640.computerbuilder.model.parts.Part;
 
@@ -31,6 +33,7 @@ public class CBFragment extends Fragment {
     public CBFragment(){
         _options = new HashMap<>();
     }
+
 
     public void setOnSubfragmentListener(OnSubfragmentListener listener){
         _listener = listener;
