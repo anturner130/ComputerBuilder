@@ -61,7 +61,7 @@ public class PartListFragment extends CBFragment {
                     @Override
                     public void OnFilterComplete() {
                         recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
-                                , mListener));
+                                , mListener, mLongListener));
                     }
                 };
                addFragmentOnTop(new FilterFragment());

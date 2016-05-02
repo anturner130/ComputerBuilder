@@ -31,17 +31,12 @@ public class DummyParts {
     private DummyParts(){
         _partsMap = new HashMap<>();
         _partsMap.put(PartType.Audio_Video_Card, new DummyAudioVideoCards());
-<<<<<<< HEAD
         _partsMap.put(PartType.Case, new DummyCase());
         _partsMap.put(PartType.Cooling, new DummyCooling());
         _partsMap.put(PartType.CPU, new DummyCPU());
-        _partsMap.put(PartType.Memory, new DummyMemory());
-        _partsMap.put(PartType.Motherboard, new DummyMotherBoard());
         _partsMap.put(PartType.Operating_System, new DummyOperatingSystem());
-=======
         _partsMap.put(PartType.Memory, new DummyMemory());
         _partsMap.put(PartType.Motherboard, new DummyMotherboards());
->>>>>>> anturner130/master
     }
 
     /**

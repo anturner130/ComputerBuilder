@@ -16,11 +16,7 @@ import comp640.computerbuilder.R;
 import comp640.computerbuilder.dummy.DummyCart;
 import comp640.computerbuilder.fragments.listeners.OnListFragmentInteractionListener;
 import comp640.computerbuilder.logic.BreakdownViewAdapter;
-<<<<<<< HEAD
-import comp640.computerbuilder.model.build.Build;
-=======
-import comp640.computerbuilder.logic.PartFilter;
->>>>>>> anturner130/master
+
 import comp640.computerbuilder.model.build.CurrentBuild;
 import comp640.computerbuilder.model.parts.PartType;
 
