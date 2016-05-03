@@ -14,6 +14,7 @@ import android.widget.TextView;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.SavedBuildsListFragment.OnListFragmentInteractionListener;
 import comp640.computerbuilder.model.build.Build;
+import comp640.computerbuilder.model.parts.PartType;
 
 
 import java.io.InputStream;
@@ -49,10 +50,15 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
         holder._item = _values.get(position);
 
         String url;
-        if(holder._item.getImageURL() != null && !holder._item.getImageURL().equals(""))
-            url = holder._item.getImageURL();
-        else
-            url = NO_IMAGE_URL;
+        if(holder._item.getPart(PartType.Case) != null){
+            url = holder._item.getPart(PartType.Case).getUrl();
+        }else {
+            if(holder._item.getImageURL() != null && !holder._item.getImageURL().equals(""))
+                url = holder._item.getImageURL();
+            else
+                url = NO_IMAGE_URL;
+        }
+
         new DownloadImageTask(holder._imageView)
                 .execute(url);
 
@@ -124,8 +130,11 @@ public class SavedBuildsViewAdapter extends RecyclerView.Adapter<SavedBuildsView
         }
 
         protected void onPostExecute(Bitmap result) {
-            Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
-            _imageView.setImageBitmap(image);
+            if(result != null){
+                Bitmap image = Bitmap.createScaledBitmap(result, _imageView.getWidth(), _imageView.getHeight(), true);
+                _imageView.setImageBitmap(image);
+            }
+
         }
     }
 }

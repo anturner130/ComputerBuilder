@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,13 +27,17 @@ import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
 
+
+
 /**
  * Created by deandubois on 4/17/16.
  */
 public class CartFragment extends CBFragment {
 
+
     private Button _checkOut;
     private TextView _totalText;
+
 
     public CartFragment(){
         _title = "My Cart";
@@ -61,26 +68,23 @@ public class CartFragment extends CBFragment {
             @Override
             public void onClick(View v) {
                 //Send to the review order fargment which has yet to be implemented
-                createSubfragment(new ReviewOrderFragment());
+                createSubfragment(new PaymentInfoFragment());
             }
         });
 
         //Create a new part list fragment and insert it into this fragment
         Fragment fragment = new PartListFragment();
         //Set the content of the cart
-        //((PartListFragment)fragment).setContent(new DummyParts().getParts());
-        //Use the child fragment manager to nest fragments
-        //DummyParts.getSingleton().getParts(PartType.Audio_Video_Card).add(new Part(456, "GeForce 770R", BuildStore.Amazon, "The Most powerful GPU With 1mb of RAM", "GeForce", PartType.Audio_Video_Card,
-         //       "http://www.mwave.com.au/images/150/ab64052_6.jpg"));
-         //       ((PartListFragment) fragment).setContent(
-        //        DummyParts.getSingleton().getParts(PartType.Audio_Video_Card)
-       // );
         ((PartListFragment)fragment).setContent(DummyCart.getSingleton().getParts());
         getChildFragmentManager().beginTransaction().add(R.id.list_cart, fragment).commit();
         getChildFragmentManager().executePendingTransactions();
         updateTotal();
 
+
+
         return rootView;
+
+
     }
 
 

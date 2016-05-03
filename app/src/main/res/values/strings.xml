@@ -41,5 +41,24 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- Strings related to Parts Filter-->
+    <string-array name="brand">
+        <item>Intel</item>
+        <item>AMD</item>
+    </string-array>
+    <string-array name="sort">
+        <item>Price: Highest to Lowest</item>
+        <item>Price: Lowest to Highest</item>
+        <item>Brand</item>
+    </string-array>
+    <string-array name="retailer">
+        <item>Newegg</item>
+        <item>Amazon</item>
+        <item>Tiger Direct</item>
+    </string-array>
+    <!--Strings related to build info Screen-->
+    <string name="build_info">We apreciate your purchase through Computer Builder! We hope that this application has guided you through the steps of purchasing the parts to build your own computer. Yet, this was the easy part!Please watch our instructional video below on how to fully assemble your custom computer:</string>
+    <string name="build_info_tips">TIPS: Do not build on carpet</string>
     >>>>>>> master
 </resources>

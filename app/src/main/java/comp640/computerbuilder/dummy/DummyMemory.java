@@ -17,13 +17,9 @@ public class DummyMemory implements IDummyParts {
     private PartType type = PartType.Memory;
     private List<Part> memory;
 
-
-
-
     public DummyMemory()
     {
         memory = new ArrayList<>();
-
 
             memory.add(new Part(28,
                     "Enhanced ECO2 8GB 240-Pin DDR3 SDRAM DDR3L 1600 (PC3L 12800) Desktop Memory",
