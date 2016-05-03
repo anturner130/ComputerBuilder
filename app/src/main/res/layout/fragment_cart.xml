@@ -22,16 +22,11 @@
             android:layout_weight="35"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="Check Out"
-            android:id="@+id/checkOutButton"
-=======
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Total:"
+            android:text="$0"
             android:id="@+id/cart_total"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_marginRight="5dp"
             android:gravity="end"
->>>>>>> master
             android:textSize="20dp"
             />
     </LinearLayout>

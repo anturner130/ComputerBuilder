@@ -21,12 +21,9 @@ import java.util.prefs.Preferences;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.backend.DataController;
 import comp640.computerbuilder.backend.listeners.OnBackendTaskCompleteListener;
-<<<<<<< HEAD
 import comp640.computerbuilder.fragments.ComputerBreakdownFragment;
-=======
 import comp640.computerbuilder.logic.SettingsReference;
 import comp640.computerbuilder.model.build.SavedBuilds;
->>>>>>> master
 
 /**
  * Created by alexanderturner on 4/10/16.
@@ -120,9 +117,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 
-                //attemptLogin(_emailEditText.getText().toString(),
-                      //  _passwordEditText.getText().toString(),
-                      //  _rememberMeButton.isChecked());
+                attemptLogin(_emailEditText.getText().toString(),
+                        _passwordEditText.getText().toString(),
+                        _rememberMeButton.isChecked());
             }
         });
 

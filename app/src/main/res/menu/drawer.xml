@@ -4,31 +4,31 @@
         <item
             android:id="@+id/myProfile"
             android:checked="true"
-            android:icon="@mipmap/ic_profile"
+            android:icon="@drawable/ic_profile"
             android:title="@string/profile" />
         <item
             android:id="@+id/newBuild"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/ic_add"
             android:title="@string/new_build" />
         <item
             android:id="@+id/savedBuild"
-            android:icon="@mipmap/ic_save"
+            android:icon="@drawable/ic_saved"
             android:title="@string/saved_builds" />
         <item
             android:id="@+id/myCart"
-            android:icon="@mipmap/ic_cart"
+            android:icon="@drawable/ic_cart"
             android:title="@string/cart" />
         <item
             android:id="@+id/settings"
-            android:icon="@mipmap/ic_cart"
+            android:icon="@drawable/ic_settings"
             android:title="@string/settings" />
         <item
             android:id="@+id/help"
-            android:icon="@mipmap/ic_help"
+            android:icon="@drawable/ic_help"
             android:title="@string/help" />
         <item
             android:id="@+id/logOut"
-            android:icon="@drawable/computer_builder_welcome"
+            android:icon="@drawable/ic_log_out"
             android:title="@string/log_out" />
     </group>
 

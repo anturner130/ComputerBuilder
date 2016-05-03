@@ -19,10 +19,10 @@ import comp640.computerbuilder.logic.SettingsReference;
  * Created by Brian on 4/25/2016.
  */
 public class PaymentInfoFragment extends CBFragment{
+
     /**
      * Switches
      */
-
     private Button _placeOrderButton;
     private EditText _textPostalAddress1;
     private EditText _textPersonName1;
@@ -31,12 +31,13 @@ public class PaymentInfoFragment extends CBFragment{
     private EditText _textCreditCard;
     private DatePicker _datepickerExpiration;
 
-
-
+    public PaymentInfoFragment(){
+        _title = "Payment Info";
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_info, container, false);
 
         _textPostalAddress1= (EditText)view.findViewById(R.id.textPostalAddress1);
         _textCityStateZip= (EditText)view.findViewById(R.id.textCityStateZip);

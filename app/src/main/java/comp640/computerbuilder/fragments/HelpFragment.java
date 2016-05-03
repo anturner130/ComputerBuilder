@@ -19,22 +19,12 @@ public class HelpFragment extends CBFragment {
         _title = "Help";
         _index = 5;
     }
-    private Button _checkOutButton;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_help, container, false);
-
-        _checkOutButton=(Button)view.findViewById(R.id.checkOutButton);
-
-        _checkOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View rootView) {
-                createSubfragment(new PaymentInfoFragment());
-            }
-        });
         return view;
     }
 }
