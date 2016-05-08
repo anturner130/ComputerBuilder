@@ -26,7 +26,9 @@ import comp640.computerbuilder.model.parts.PartType;
  */
 public class PartListFragment extends CBFragment {
 
-    private RecyclerView recyclerView;
+
+
+    protected RecyclerView recyclerView;
 
     public void setContent(List<Part> content) {
 
@@ -44,8 +46,8 @@ public class PartListFragment extends CBFragment {
     /**
      * The fragment interaction listener.
      */
-    private OnListFragmentInteractionListener mListener;
-    private OnOnListFragmentLongClickListener mLongListener;
+    protected OnListFragmentInteractionListener mListener;
+    protected OnOnListFragmentLongClickListener mLongListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -130,5 +132,10 @@ public class PartListFragment extends CBFragment {
 
     public interface OnOnListFragmentLongClickListener {
         void onListFragmentLongClick(PartViewAdapter.ViewHolder viewHolder, int position);
+    }
+
+    public void setParent(int parent)
+    {
+        _parentID = parent;
     }
 }

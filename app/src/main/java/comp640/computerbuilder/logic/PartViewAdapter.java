@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class PartViewAdapter extends RecyclerView.Adapter<PartViewAdapter.ViewHolder> {
 
-    private final int MAX_CONTENT_STRING_LENGTH = 50;
+    private final int MAX_CONTENT_STRING_LENGTH = 150;
     private final int MAX_NAME_STRING_LENGTH = 40;
     private final List<Part> mValues;
     private final OnListFragmentInteractionListener mListener;

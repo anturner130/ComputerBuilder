@@ -23,6 +23,7 @@ import comp640.computerbuilder.R;
 import comp640.computerbuilder.activities.MenuActivity;
 import comp640.computerbuilder.dummy.DummyCart;
 import comp640.computerbuilder.dummy.DummyParts;
+import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.model.build.BuildStore;
 import comp640.computerbuilder.model.parts.Part;
 import comp640.computerbuilder.model.parts.PartType;
@@ -42,7 +43,12 @@ public class CartFragment extends CBFragment {
     public CartFragment(){
         _title = "My Cart";
         _index = 3;
-
+        addMenuOption(R.menu.add_build, new OnOptionClickedListener() {
+            @Override
+            public void onClick() {
+                createSubfragment(new IndividualPartFragment());
+            }
+        });
     }
 
     public void updateTotal()

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import comp640.computerbuilder.R;
+import comp640.computerbuilder.fragments.IndividualPartFragment;
 
 /**
  * Created by alexanderturner on 4/10/16.
@@ -77,13 +78,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void switchToBuildActivity(){
         //Temporary bypass of the login
-        startActivity(MenuActivity.class);
+        startActivity(MenuActivity.class, R.id.savedBuild);
     }
 
     /**
      * Switch to the buy activity.
      */
     private void switchToBuyActivity(){
+        startActivity(MenuActivity.class, R.id.individualParts);
 
     }
 
@@ -91,15 +93,19 @@ public class MainActivity extends AppCompatActivity {
      * Switch to the login activity.
      */
     private void switchToLoginActivity(){
-        startActivity(LoginActivity.class);
+        Intent activity = new Intent().setClass(getApplicationContext(), LoginActivity.class);
+        startActivity(activity);
     }
 
     /**
      * Starts a new activity.
      */
-    private void startActivity(Class activityClass){
-        Intent activity = new Intent().setClass(getApplicationContext(), activityClass);
-        startActivity(activity);
+    private void startActivity(Class activityClass, int id){
+        Intent intent = new Intent(getApplicationContext(), activityClass);
+        Bundle b = new Bundle();
+        b.putInt("_fragment", id); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
     }
 
 }

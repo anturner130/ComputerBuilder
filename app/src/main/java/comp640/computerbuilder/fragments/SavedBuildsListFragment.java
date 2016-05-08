@@ -32,7 +32,7 @@ public class SavedBuildsListFragment extends CBFragment implements OnBuildsChang
      */
     public SavedBuildsListFragment() {
         _title = "Saved Builds";
-        _index = 2;
+        _index = 1;
         addMenuOption(R.menu.add_build, new OnOptionClickedListener() {
             @Override
             public void onClick() {

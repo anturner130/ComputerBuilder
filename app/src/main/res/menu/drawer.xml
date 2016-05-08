@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/myProfile"
-            android:checked="true"
-            android:icon="@drawable/ic_profile"
-            android:title="@string/profile" />
-        <item
             android:id="@+id/newBuild"
             android:icon="@drawable/ic_add"
             android:title="@string/new_build" />
@@ -14,6 +9,10 @@
             android:id="@+id/savedBuild"
             android:icon="@drawable/ic_saved"
             android:title="@string/saved_builds" />
+        <item
+            android:id="@+id/individualParts"
+            android:icon="@drawable/ic_saved"
+            android:title="@string/individual_Parts" />
         <item
             android:id="@+id/myCart"
             android:icon="@drawable/ic_cart"

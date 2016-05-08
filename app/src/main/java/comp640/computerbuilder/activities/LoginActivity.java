@@ -282,8 +282,11 @@ public class LoginActivity extends AppCompatActivity {
      * Switch to the saved builds activity.
      */
     private void switchToBuildsActivity(){
-        Intent activity = new Intent().setClass(getApplicationContext(), MenuActivity.class);
-        startActivity(activity);
+        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("_fragment", R.id.savedBuild); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
     }
 }
 
