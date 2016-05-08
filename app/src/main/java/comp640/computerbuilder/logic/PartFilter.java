@@ -30,7 +30,7 @@ public class PartFilter {
     /**
      * Private constructor for filter data.
      */
-    private PartFilter(){}
+    private PartFilter(){sortType = SortType.No_Sort;}
 
     /**
      * Gets the singleton

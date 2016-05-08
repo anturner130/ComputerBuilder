@@ -9,13 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -27,20 +25,17 @@ import comp640.computerbuilder.fragments.CartFragment;
 import comp640.computerbuilder.R;
 import comp640.computerbuilder.fragments.ComputerBreakdownFragment;
 import comp640.computerbuilder.fragments.HelpFragment;
+import comp640.computerbuilder.fragments.IndividualPartFragment;
 import comp640.computerbuilder.fragments.PartListFragment;
-import comp640.computerbuilder.fragments.ProfileFragment;
 import comp640.computerbuilder.fragments.SavedBuildsListFragment;
 import comp640.computerbuilder.fragments.SettingsFragment;
 import comp640.computerbuilder.fragments.listeners.OnOptionClickedListener;
 import comp640.computerbuilder.fragments.listeners.OnSubfragmentListener;
+import comp640.computerbuilder.logic.BuyPartViewAdapter;
 import comp640.computerbuilder.logic.PartViewAdapter;
 import comp640.computerbuilder.model.build.Build;
 import comp640.computerbuilder.model.build.CurrentBuild;
-import comp640.computerbuilder.model.build.CurrentBuild;
 
-import comp640.computerbuilder.model.build.BuildStore;
-import comp640.computerbuilder.model.parts.Part;
-import comp640.computerbuilder.model.parts.PartType;
 /*
 * Activity that handles all fragments that use the menu
 *
@@ -55,7 +50,7 @@ public class MenuActivity extends AppCompatActivity
     private DrawerLayout _drawerLayout;
     NavigationView _navigationView;
     FrameLayout _contentFrame;
-    CBFragment _fragment;
+    CBFragment _fragment = null;
     private HashMap<Integer, OnOptionClickedListener> _optionsMap;
     private CBFragment _topFragment;
 
@@ -83,9 +78,18 @@ public class MenuActivity extends AppCompatActivity
     public void onListFragmentInteraction(PartViewAdapter.ViewHolder viewHolder, int position) {
         Log.v("Pos", "Position" + position);
         if(_fragment.getClass().equals(PartListFragment.class)){
-            CurrentBuild.getSingleton().getCurrentBuild().setPart(viewHolder.mItem);
-            Log.v("Pos", "Position" + position);
-            onRemoveSubfragment(_fragment);
+            switch(_fragment.getParentID())
+            {
+                case R.layout.fragment_computer_breakdown:
+                    CurrentBuild.getSingleton().getCurrentBuild().setPart(viewHolder.mItem);
+                    onRemoveSubfragment(_fragment);
+                    break;
+                case R.id.individualParts:
+                    DummyCart.getSingleton().add(viewHolder.mItem);
+                    inflateFragment(new CartFragment(), false);
+                    break;
+            }
+
         }else if(_fragment.getClass().equals(CartFragment.class)){
             Log.v("Pos", "Position" + position +" location: Cart");
         }
@@ -94,6 +98,7 @@ public class MenuActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
 
 
         //Set the content View to the default view
@@ -109,9 +114,11 @@ public class MenuActivity extends AppCompatActivity
 
         //Set up the navigation drawer
         setUpNavDrawer();
-
+        int temp = b.getInt("_fragment", R.id.savedBuild);
         //Inflate the fragment
-        inflateFragment(new SavedBuildsListFragment(),false);
+
+        selectFragmentFromResource(temp);
+
     }
 
     @Override
@@ -197,14 +204,14 @@ public class MenuActivity extends AppCompatActivity
     private void selectFragmentFromResource(int id){
         CBFragment frag = null;
         switch (id) {
-            case R.id.myProfile:
-                frag = new ProfileFragment();
-                break;
             case R.id.newBuild:
                 frag = new AddBuildFragment();
                 break;
             case R.id.savedBuild:
                 frag = new SavedBuildsListFragment();
+                break;
+            case R.id.individualParts:
+                frag = new IndividualPartFragment();
                 break;
             case R.id.myCart:
                 frag = new CartFragment();
@@ -293,8 +300,15 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Build item) {
-        CurrentBuild.getSingleton().setCurrentBuild(item);
-        inflateFragment(new ComputerBreakdownFragment(),false);
+        if(_fragment.getClass().equals(SavedBuildsListFragment.class))
+        {
+            CurrentBuild.getSingleton().setCurrentBuild(item);
+            inflateFragment(new ComputerBreakdownFragment(),false);
+        }else if(_fragment.getClass().equals(BuyPartViewAdapter.class))
+        {
+            inflateFragment(new CartFragment(), false);
+        }
+
     }
 
 

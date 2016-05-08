@@ -87,7 +87,7 @@ public class AddBuildFragment extends CBFragment implements SeekBar.OnSeekBarCha
      */
     public AddBuildFragment(){
         _title = "Add Build";
-        _index = 1;
+        _index = 0;
         _parentID = R.id.savedBuild;
     }
 

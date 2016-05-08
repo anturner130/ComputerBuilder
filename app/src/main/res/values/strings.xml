@@ -34,6 +34,7 @@
     <string name="profile">My Profile</string>
     <string name="new_build">New Build</string>
     <string name="saved_builds">Saved Builds</string>
+    <string name="individual_Parts">Buy Individual Parts</string>
     <string name="cart">My Cart</string>
     <string name="settings">Settings</string>
     <string name="help">Help</string>
@@ -60,5 +61,6 @@
     <!--Strings related to build info Screen-->
     <string name="build_info">We apreciate your purchase through Computer Builder! We hope that this application has guided you through the steps of purchasing the parts to build your own computer. Yet, this was the easy part!Please watch our instructional video below on how to fully assemble your custom computer:</string>
     <string name="build_info_tips">TIPS: Do not build on carpet</string>
+
     >>>>>>> master
 </resources>
