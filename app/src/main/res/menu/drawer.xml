@@ -11,7 +11,7 @@
             android:title="@string/saved_builds" />
         <item
             android:id="@+id/individualParts"
-            android:icon="@drawable/ic_saved"
+            android:icon="@mipmap/ic_individual"
             android:title="@string/individual_Parts" />
         <item
             android:id="@+id/myCart"
