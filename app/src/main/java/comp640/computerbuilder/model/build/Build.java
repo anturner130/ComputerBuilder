@@ -166,4 +166,15 @@ public class Build {
             price += parts.get(parts.keySet().toArray()[i]).getPrice();
         }
     }
+
+    @JsonIgnore
+    public boolean isBuildComplete(){
+        if(parts == null)
+            parts = new HashMap<>();
+        for(int i = 0 ; i < PartType.values().length; i ++)
+            if(parts.get(PartType.values()[i].toString()) == null)
+                return false;
+
+        return true;
+    }
 }

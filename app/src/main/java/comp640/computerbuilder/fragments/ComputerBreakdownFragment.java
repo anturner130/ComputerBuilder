@@ -107,9 +107,12 @@ public class ComputerBreakdownFragment extends CBFragment implements View.OnClic
 
     private void tryFinishBuild(){
 
-        Toast.makeText(getContext(),"Test submit", Toast.LENGTH_LONG).show();
-        DummyCart.getSingleton().add(CurrentBuild.getSingleton().getCurrentBuild().getParts());
-        createSubfragment(new CartFragment());
+        if(!CurrentBuild.getSingleton().getCurrentBuild().isBuildComplete())
+            Toast.makeText(getContext(),"Build missing parts", Toast.LENGTH_LONG).show();
+        else {
+            DummyCart.getSingleton().add(CurrentBuild.getSingleton().getCurrentBuild().getParts());
+            createSubfragment(new CartFragment());
+        }
     }
 
     @Override
