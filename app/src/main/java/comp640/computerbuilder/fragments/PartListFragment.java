@@ -62,7 +62,7 @@ public class PartListFragment extends CBFragment {
                 FilterFragment.listener = new FilterFragment.OnFilterCompleteListener() {
                     @Override
                     public void OnFilterComplete() {
-                        recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
+                        recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content, getContext())
                                 , mListener, mLongListener));
                     }
                 };
@@ -89,7 +89,7 @@ public class PartListFragment extends CBFragment {
             Context context = view.getContext();
             recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content)
+            recyclerView.setAdapter(new PartViewAdapter(PartFilter.getFilter().filterParts(content, getContext())
                     , mListener, mLongListener));
         }
         return view;
