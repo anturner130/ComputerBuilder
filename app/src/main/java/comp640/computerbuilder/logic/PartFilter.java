@@ -1,5 +1,8 @@
 package comp640.computerbuilder.logic;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -94,7 +97,7 @@ public class PartFilter {
      * @param partsToFilter the parts to filter
      * @return the filtered parts
      */
-    public List<Part> filterParts(List<Part> partsToFilter){
+    public List<Part> filterParts(List<Part> partsToFilter, Context context){
 
         List<Part> newPartList = new ArrayList<>();
         if(maxPrice != -1){
@@ -180,8 +183,10 @@ public class PartFilter {
             }
         }
 
-        if(newPartList.isEmpty())
+        if(newPartList.isEmpty()) {
+            //Toast.makeText(context,"Zero Filter Results", Toast.LENGTH_LONG).show();
             return partsToFilter;
+        }
 
         return newPartList;
     }

@@ -14,11 +14,13 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Billing Address"
-            android:id="@+id/billingAddress1"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+
+            android:id="@+id/billingAddress1" />
 
         <EditText
-            android:layout_width="142dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="Name"
@@ -50,7 +52,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Payment Information"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
             android:id="@+id/textView9" />
     </LinearLayout>
 
@@ -72,18 +75,23 @@
             android:text="CVC" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Expiration Date"
+            android:textStyle="italic"
             android:id="@+id/textExpirationDate"
+            android:layout_gravity="center"
+            android:textAlignment="center"
             android:enabled="false"
             android:textColor="#040404" />
 
         <DatePicker
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:calendarViewShown="false"
             android:id="@+id/datePickerExpiration"
+            android:layout_gravity="center"
             android:calendarTextColor="#331818" />
 
     </LinearLayout>
@@ -93,12 +101,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Place Order"
             android:id="@+id/placeOrderButton"
-            android:layout_gravity="center_horizontal" />
+            android:textColor="@color/colorButtonText"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 </LinearLayout>

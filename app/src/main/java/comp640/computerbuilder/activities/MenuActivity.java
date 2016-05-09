@@ -211,7 +211,7 @@ public class MenuActivity extends AppCompatActivity
                 frag = new SavedBuildsListFragment();
                 break;
             case R.id.individualParts:
-                frag = new IndividualPartFragment();
+                frag = new IndividualPartFragment();;
                 break;
             case R.id.myCart:
                 frag = new CartFragment();
@@ -242,6 +242,7 @@ public class MenuActivity extends AppCompatActivity
             _drawerLayout.closeDrawer(GravityCompat.START);
             if(_fragment != null && fragment.getClass().equals(_fragment.getClass()))
                 return;
+            setTitle(fragment.getTitle());
             _toolbar.setTitle(fragment.getTitle());
            if(fragment.getIndex()!= -1)
                 _navigationView.getMenu().getItem(fragment.getIndex()).setChecked(true);
